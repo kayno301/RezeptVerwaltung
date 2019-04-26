@@ -23,6 +23,8 @@ public class SampleData implements ApplicationListener<ContextRefreshedEvent> {
 
         spRep.save(new RezeptFactory().createRezept("Test", "Spaghetti", "Jaja", "Reiss", "Max", "Mustermann", "Vegan"));
 
+        spRep.save(new RezeptFactory().createRezept("Test", "Spaghetti", "Jaja", "Reiss", "Max", "Mustermann", "Vegan"));
+
     }
 
 

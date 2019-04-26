@@ -20,7 +20,7 @@ public class Rezept {
     @JsonBackReference
     private Speisekarte speisekarte;
 
-    @ManyToMany(mappedBy = "rezept")
+    @ManyToMany(mappedBy = "rezept", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Set<Zutat> zutat = new HashSet<>();
 
     private String rezeptNamen;
@@ -29,6 +29,7 @@ public class Rezept {
 
     @Embedded
     private Kategorie kategorie;
+
     @ManyToMany(cascade= CascadeType.MERGE,fetch= FetchType.EAGER)
     private Collection<Zutat>zutats;
 
