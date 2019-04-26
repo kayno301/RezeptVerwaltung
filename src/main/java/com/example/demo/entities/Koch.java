@@ -5,19 +5,18 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-public class Mitarbeiter {
+public class Koch {
 
     @Id
     @GeneratedValue
     private Long id;
 
-
     private String mitarbeitername;
     private String mitarbeitervornamen;
 
-    protected Mitarbeiter (){}
+    protected Koch (){}
 
-    public Mitarbeiter( String mitarbeitername, String mitarbeitervornamen) {
+    public Koch( String mitarbeitername, String mitarbeitervornamen) {
                this.mitarbeitername = mitarbeitername;
         this.mitarbeitervornamen = mitarbeitervornamen;
     }
