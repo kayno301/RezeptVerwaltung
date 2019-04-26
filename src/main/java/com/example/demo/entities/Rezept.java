@@ -1,5 +1,6 @@
 package com.example.demo.entities;
 
+import com.example.demo.valueObjects.Kategorie;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
@@ -23,6 +24,9 @@ public class Rezept {
     private String rezeptNamen;
     private String rezeptBeschreibung;
     private String rezeptZutaten;
+
+    @Embedded
+    private Kategorie kategorie;
 
 
     protected Rezept (){}
@@ -71,12 +75,13 @@ public class Rezept {
     public Rezept (String rezeptNamen,
                    String rezeptBeschreibung,
                    String rezeptZutaten,
-                   Speisekarte speisekarte){
+                   Speisekarte speisekarte,
+                   Kategorie kategorie){
         this.rezeptNamen = rezeptNamen;
         this.rezeptBeschreibung = rezeptBeschreibung;
         this.rezeptZutaten = rezeptZutaten;
         this.speisekarte = speisekarte;
-
+        this.kategorie = kategorie;
 
     }
 
@@ -88,6 +93,7 @@ public class Rezept {
                 ", rezeptNamen='" + rezeptNamen + '\'' +
                 ", rezeptBeschreibung='" + rezeptBeschreibung + '\'' +
                 ", rezeptZutaten='" + rezeptZutaten + '\'' +
+                ", kategorie='" + kategorie + "\'" +
                 '}';
     }
 }
