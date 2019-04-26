@@ -20,7 +20,8 @@ public class Rezept {
     @JsonBackReference
     private Speisekarte speisekarte;
 
-
+    @ManyToMany(mappedBy = "rezept")
+    private Set<Zutat> zutat = new HashSet<>();
 
     private String rezeptNamen;
     private String rezeptBeschreibung;
@@ -88,13 +89,13 @@ public class Rezept {
     public Rezept (String rezeptNamen,
                    String rezeptBeschreibung,
                    String rezeptZutaten,
-                   Speisekarte speisekarte,
-                   Kategorie kategorie){
+                   Speisekarte speisekarte
+                   /*Kategorie kategorie*/){
         this.rezeptNamen = rezeptNamen;
         this.rezeptBeschreibung = rezeptBeschreibung;
         this.rezeptZutaten = rezeptZutaten;
         this.speisekarte = speisekarte;
-        this.kategorie = kategorie;
+        //this.kategorie = kategorie;
 
     }
 
@@ -106,7 +107,7 @@ public class Rezept {
                 ", rezeptNamen='" + rezeptNamen + '\'' +
                 ", rezeptBeschreibung='" + rezeptBeschreibung + '\'' +
                 ", rezeptZutaten='" + rezeptZutaten + '\'' +
-                ", kategorie='" + kategorie + "\'" +
+                ", kategorie='" + /* kategorie + */"\'" +
                 '}';
     }
 }
