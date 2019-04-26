@@ -1,7 +1,7 @@
 package com.example.demo;
 
 import com.example.demo.factories.RezeptFactory;
-import com.example.demo.reporsitories.MitarbeiterReporsitory;
+import com.example.demo.reporsitories.KochReporsitory;
 import com.example.demo.reporsitories.RezeptReporsitory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
@@ -15,13 +15,13 @@ public class SampleData implements ApplicationListener<ContextRefreshedEvent> {
     private RezeptReporsitory spRep;
 
     @Autowired
-    private MitarbeiterReporsitory miRep;
+    private KochReporsitory miRep;
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent arg0) {
 
 
-        spRep.save(new RezeptFactory().createRezept("Test", "Spaghetti", "Jaja", "Reiss", "Max", "Mustermann"));
+        spRep.save(new RezeptFactory().createRezept("Test", "Spaghetti", "Jaja", "Reiss", "Max", "Mustermann", "Vegan"));
 
     }
 

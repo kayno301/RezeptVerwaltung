@@ -14,7 +14,7 @@ public class RezeptFactory {
     public Rezept createRezept (String speisekartenNamen, String rezeptNamen, String rezeptBeschreibung, String rezeptZutaten, String mitarbeiterNamen, String mitarbeiterVornamen, String kategorieName){
         Speisekarte speisekarte1 = new Speisekarte(speisekartenNamen);
         Kategorie kategorieObj = new Kategorie(kategorieName);
-        Rezept r1 = new Rezept(rezeptNamen, rezeptBeschreibung, rezeptZutaten, speisekarte1, kategorieObj);
+        Rezept r1 = new Rezept(rezeptNamen, rezeptBeschreibung, rezeptZutaten, speisekarte1);
 
         Koch m1 = new Koch(mitarbeiterNamen, mitarbeiterVornamen);
         r1.setSpeisekarte(speisekarte1);

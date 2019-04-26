@@ -1,16 +1,11 @@
 package com.example.demo.valueObjects;
 
 
-import javax.persistence.Embeddable;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Embeddable
 public class Kategorie{
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+
 
     private String kategorieName;
 

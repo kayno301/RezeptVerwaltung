@@ -4,6 +4,8 @@ package com.example.demo.entities;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Zutat {
@@ -14,7 +16,8 @@ public class Zutat {
     private int zutatMenge;
 
     @ManyToMany(cascade= CascadeType.MERGE,fetch= FetchType.EAGER)
-    private Collection<Rezept>rezepts;
+    @JoinTable
+    private Set<Rezept> rezept = new HashSet<>();
 
     public Zutat() {
     }
@@ -44,11 +47,11 @@ public class Zutat {
     }
 
     public Collection<Rezept> getRezepts() {
-        return rezepts;
+        return rezept;
     }
 
-    public void setRezepts(Collection<Rezept> rezepts) {
-        this.rezepts = rezepts;
+    public void setRezepts(Set<Rezept> rezept) {
+        this.rezept = rezept;
     }
 
     @Override
@@ -57,7 +60,7 @@ public class Zutat {
                 "id=" + id +
                 ", zutatName='" + zutatName + '\'' +
                 ", zutatMenge=" + zutatMenge +
-                ", rezepts=" + rezepts +
+                ", rezepts=" + rezept +
                 '}';
     }
 }
