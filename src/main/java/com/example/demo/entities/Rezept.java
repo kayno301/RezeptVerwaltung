@@ -4,6 +4,7 @@ import com.example.demo.valueObjects.Kategorie;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -27,9 +28,21 @@ public class Rezept {
 
     @Embedded
     private Kategorie kategorie;
+    @ManyToMany(cascade= CascadeType.MERGE,fetch= FetchType.EAGER)
+    private Collection<Zutat>zutats;
 
 
     protected Rezept (){}
+
+    public Rezept(Speisekarte speisekarte, String rezeptNamen, String rezeptBeschreibung,
+                  String rezeptZutaten, Kategorie kategorie, Collection<Zutat> zutats) {
+        this.speisekarte = speisekarte;
+        this.rezeptNamen = rezeptNamen;
+        this.rezeptBeschreibung = rezeptBeschreibung;
+        this.rezeptZutaten = rezeptZutaten;
+        this.kategorie = kategorie;
+        this.zutats = zutats;
+    }
 
     public Long getId() {
         return id;
