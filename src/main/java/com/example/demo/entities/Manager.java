@@ -1,5 +1,8 @@
 package com.example.demo.entities;
 
+import javax.persistence.Entity;
+
+@Entity
 public class Manager extends Mitarbeiter {
     protected Manager (){}
 
