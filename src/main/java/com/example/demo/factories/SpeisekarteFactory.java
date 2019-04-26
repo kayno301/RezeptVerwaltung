@@ -14,7 +14,7 @@ public class SpeisekarteFactory {
         Rezept r1 = new Rezept(rezeptNamen, rezeptBeschreibung, rezeptZutaten, speisekarte1);
 
         r1.setSpeisekarte(speisekarte1);
-
+//fh
 
 
         return speisekarte1;
