@@ -25,7 +25,7 @@ public class Rezept {
 
     private String rezeptNamen;
     private String rezeptBeschreibung;
-    private String rezeptZutaten;
+
 
     @Embedded
     private Kategorie kategorie;
@@ -37,11 +37,11 @@ public class Rezept {
     protected Rezept (){}
 
     public Rezept(Speisekarte speisekarte, String rezeptNamen, String rezeptBeschreibung,
-                  String rezeptZutaten, Kategorie kategorie, Collection<Zutat> zutats) {
+                   Kategorie kategorie, Collection<Zutat> zutats) {
         this.speisekarte = speisekarte;
         this.rezeptNamen = rezeptNamen;
         this.rezeptBeschreibung = rezeptBeschreibung;
-        this.rezeptZutaten = rezeptZutaten;
+
         this.kategorie = kategorie;
         this.zutats = zutats;
     }
@@ -79,13 +79,7 @@ public class Rezept {
         this.rezeptBeschreibung = rezeptBeschreibung;
     }
 
-    public String getRezeptZutaten() {
-        return rezeptZutaten;
-    }
 
-    public void setRezeptZutaten(String rezeptZutaten) {
-        this.rezeptZutaten = rezeptZutaten;
-    }
 
     public Rezept (String rezeptNamen,
                    String rezeptBeschreibung,
@@ -94,7 +88,7 @@ public class Rezept {
                    /*Kategorie kategorie*/){
         this.rezeptNamen = rezeptNamen;
         this.rezeptBeschreibung = rezeptBeschreibung;
-        this.rezeptZutaten = rezeptZutaten;
+
         this.speisekarte = speisekarte;
         //this.kategorie = kategorie;
 
@@ -107,7 +101,7 @@ public class Rezept {
                 ", speisekarte=" + speisekarte +
                 ", rezeptNamen='" + rezeptNamen + '\'' +
                 ", rezeptBeschreibung='" + rezeptBeschreibung + '\'' +
-                ", rezeptZutaten='" + rezeptZutaten + '\'' +
+
                 ", kategorie='" + /* kategorie + */"\'" +
                 '}';
     }
