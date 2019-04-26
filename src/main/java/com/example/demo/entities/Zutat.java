@@ -22,6 +22,11 @@ public class Zutat {
     public Zutat() {
     }
 
+    public Zutat(String zutatName, int zutatMenge) {
+        this.zutatName = zutatName;
+        this.zutatMenge = zutatMenge;
+    }
+
     public Long getId() {
         return id;
     }
