@@ -12,16 +12,16 @@ public class Kategorie{
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String name;
+    private String kategorieName;
 
     protected Kategorie() {
     }
 
-    public Kategorie(String name) {
-        this.name = name;
+    public Kategorie(String kategorieName) {
+        this.kategorieName = kategorieName;
     }
 
     public String toString(){
-        return this.name;
+        return this.kategorieName;
     }
 }
