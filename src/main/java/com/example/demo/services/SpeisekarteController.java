@@ -57,7 +57,7 @@ public class SpeisekarteController {
      * @return
      */
     @RequestMapping(value = "/speisekarte", method = RequestMethod.POST)
-    public ResponseEntity <?> persistPerson(@RequestParam("s1") Speisekarte s1
+    public ResponseEntity <?> persistPerson(@RequestParam("s1") String s1
              )    {
         Speisekarte k = speisekarteRepository.save(new SpeisekarteFactory().createSpeisekarte(s1));
         URI location = ServletUriComponentsBuilder.fromCurrentRequestUri()

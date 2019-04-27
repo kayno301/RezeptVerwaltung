@@ -41,7 +41,7 @@ public class SampleData implements ApplicationListener<ContextRefreshedEvent> {
         spRep.save(r1);
 
         spRep.save(new RezeptFactory().createRezept( "Spaghetti", "Jaja", "Reiss", k1, koch1));
-        sRep.save(new SpeisekarteFactory().createSpeisekarte(s1, r1));
+
     }
 
 
