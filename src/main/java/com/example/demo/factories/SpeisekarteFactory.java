@@ -10,5 +10,9 @@ public class SpeisekarteFactory {
 
     public SpeisekarteFactory (){}
 
+    public Speisekarte createSpeisekarte (Speisekarte s1){
 
+
+        return s1;
+    }
 }
