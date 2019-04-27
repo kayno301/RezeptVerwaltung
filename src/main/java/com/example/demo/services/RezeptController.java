@@ -1,11 +1,13 @@
 package com.example.demo.services;
 
+import com.example.demo.entities.Koch;
 import com.example.demo.entities.Rezept;
 import com.example.demo.entities.Speisekarte;
 import com.example.demo.factories.RezeptFactory;
 import com.example.demo.factories.SpeisekarteFactory;
 import com.example.demo.reporsitories.RezeptReporsitory;
 import com.example.demo.reporsitories.SpeisekarteReporsitory;
+import com.example.demo.valueObjects.Kategorie;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -62,10 +64,10 @@ public class RezeptController {
     public ResponseEntity <?> persistPerson(
             @RequestParam("speisekartenNamen") String speisekartenNamen, @RequestParam("rezeptNamen") String rezeptNamen,
             @RequestParam("rezeptBeschreibung") String rezeptBeschreibung, @RequestParam("rezeptZutaten") String rezeptZutaten,
-            @RequestParam("kategorieName") String kategorieName)
+            @RequestParam("kategorieName") Kategorie kategorieName, @RequestParam("koch") Koch koch1)
     {
         Rezept k = rezeptReporsitory.save(new RezeptFactory().createRezept(speisekartenNamen, rezeptNamen, rezeptBeschreibung, rezeptZutaten,
-                                             kategorieName));
+                                             kategorieName, koch1));
         URI location = ServletUriComponentsBuilder.fromCurrentRequestUri()
                 .path("/{id}").buildAndExpand( k.getId() ).toUri();
         return ResponseEntity.created( location ).body( k );

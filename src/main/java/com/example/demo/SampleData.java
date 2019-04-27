@@ -5,6 +5,7 @@ import com.example.demo.factories.KochFactory;
 import com.example.demo.factories.RezeptFactory;
 import com.example.demo.reporsitories.KochReporsitory;
 import com.example.demo.reporsitories.RezeptReporsitory;
+import com.example.demo.valueObjects.Kategorie;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -23,11 +24,12 @@ public class SampleData implements ApplicationListener<ContextRefreshedEvent> {
     public void onApplicationEvent(ContextRefreshedEvent arg0) {
 
 
+        Kategorie k1 = new Kategorie ("Vegan");
         Koch koch1 = new KochFactory().createKoch("Max", "Mustermann");
         miRep.save(koch1);
-        spRep.save(new RezeptFactory().createRezept("Test", "Spaghetti", "Jaja", "Reiss", "Vegan"));
+        spRep.save(new RezeptFactory().createRezept("Test", "Spaghetti", "Jaja", "Reiss", k1, koch1));
 
-        spRep.save(new RezeptFactory().createRezept("Test", "Spaghetti", "Jaja", "Reiss", "Vegan"));
+        spRep.save(new RezeptFactory().createRezept("Test", "Spaghetti", "Jaja", "Reiss", k1, koch1));
 
     }
 

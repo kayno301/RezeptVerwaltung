@@ -26,6 +26,12 @@ public class Zutat {
         this.zutatMenge = zutatMenge;
     }
 
+    public Zutat(String zutatName, int zutatMenge, Set<Rezept> rezept) {
+        this.zutatName = zutatName;
+        this.zutatMenge = zutatMenge;
+        this.rezept = rezept;
+    }
+
     public Long getId() {
         return id;
     }
