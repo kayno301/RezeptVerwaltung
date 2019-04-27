@@ -9,6 +9,8 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class SampleData implements ApplicationListener<ContextRefreshedEvent> {
 
@@ -47,6 +49,15 @@ public class SampleData implements ApplicationListener<ContextRefreshedEvent> {
         sRep.save(s1);
         Manager m2=new ManagerFactory().createManager("Kamal","Hida",s1);
         managerRepository.save(m2);
+
+//      find method to list all workers called Kamal
+        List<Koch>kochList=miRep.findByMitarbeitername("Kamal");
+        for(Koch koch:kochList){
+            System.out.println(koch.getMitarbeitername());
+
+        }
+
+
     }
 
 

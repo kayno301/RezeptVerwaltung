@@ -17,4 +17,19 @@ public class Koch extends Mitarbeiter{
     public Koch( String mitarbeitername, String mitarbeitervornamen) {
         super(mitarbeitername, mitarbeitervornamen);
     }
+
+    public Set<Rezept> getRezepte() {
+        return rezepte;
+    }
+
+    public void setRezepte(Set<Rezept> rezepte) {
+        this.rezepte = rezepte;
+    }
+
+    @Override
+    public String toString() {
+        return "Koch{" +
+                "rezepte=" + rezepte +
+                '}';
+    }
 }
