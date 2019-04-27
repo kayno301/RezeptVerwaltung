@@ -9,6 +9,8 @@ public class ZutatFactory {
     public Zutat createZutat (String zutatNamen, int zutatMenge){
         Zutat z1 = new Zutat (zutatNamen, zutatMenge);
 
+        z1.setZutatName(zutatNamen);
+        z1.setZutatMenge(zutatMenge);
         return z1;
     }
 }

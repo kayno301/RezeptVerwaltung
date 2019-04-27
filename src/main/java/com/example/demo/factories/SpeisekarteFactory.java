@@ -10,7 +10,7 @@ public class SpeisekarteFactory {
 
     public SpeisekarteFactory (){}
 
-    public Speisekarte createSpeisekarte (String speisekartenNamen){
+    public Speisekarte createSpeisekarte (String speisekartenNamen, Rezept rezept){
 
         Speisekarte speisekarten = new Speisekarte(speisekartenNamen);
         return speisekarten ;
