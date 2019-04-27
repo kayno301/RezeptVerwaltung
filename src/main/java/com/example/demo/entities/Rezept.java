@@ -20,6 +20,10 @@ public class Rezept {
     @JsonBackReference
     private Speisekarte speisekarte;
 
+    @ManyToOne
+    @JsonBackReference
+    private Koch koch;
+
     @ManyToMany(mappedBy = "rezept", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Set<Zutat> zutat = new HashSet<>();
 
@@ -37,13 +41,15 @@ public class Rezept {
     protected Rezept (){}
 
     public Rezept(Speisekarte speisekarte, String rezeptNamen, String rezeptBeschreibung,
-                  String rezeptZutaten, Kategorie kategorie, Collection<Zutat> zutats) {
+                  String rezeptZutaten, Kategorie kategorie, Collection<Zutat> zutats
+                  ) {
         this.speisekarte = speisekarte;
         this.rezeptNamen = rezeptNamen;
         this.rezeptBeschreibung = rezeptBeschreibung;
         this.rezeptZutaten = rezeptZutaten;
         this.kategorie = kategorie;
         this.zutats = zutats;
+
     }
 
     public Long getId() {

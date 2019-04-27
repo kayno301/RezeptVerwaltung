@@ -68,7 +68,7 @@ public class KochController {
     public ResponseEntity <?> persistPerson(
             @RequestParam("mitarbeiterName") String mitarbeiterName, @RequestParam("mitarbeiterVornamen") String mitarbeiterVornamen)
     {
-        Koch k = kochReporsitory.save(new KochFactory().createMitarbeiter(mitarbeiterName, mitarbeiterVornamen));
+        Koch k = kochReporsitory.save(new KochFactory().createKoch(mitarbeiterName, mitarbeiterVornamen));
         URI location = ServletUriComponentsBuilder.fromCurrentRequestUri()
                 .path("/{id}").buildAndExpand( k.getId() ).toUri();
         return ResponseEntity.created( location ).body( k );

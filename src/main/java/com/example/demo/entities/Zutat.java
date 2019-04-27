@@ -16,7 +16,6 @@ public class Zutat {
     private int zutatMenge;
 
     @ManyToMany(cascade= CascadeType.MERGE,fetch= FetchType.EAGER)
-    @JoinTable( name = "zutaten")
     private Set<Rezept> rezept = new HashSet<>();
 
     public Zutat() {

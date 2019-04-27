@@ -8,6 +8,10 @@ import java.util.Set;
 public class Koch extends Mitarbeiter{
     protected Koch (){}
 
+
+    @OneToMany(mappedBy = "koch", cascade = CascadeType.PERSIST)
+    private Set<Rezept> rezepte = new HashSet<>();
+
     public Koch( String mitarbeitername, String mitarbeitervornamen) {
         super(mitarbeitername, mitarbeitervornamen);
     }

@@ -8,7 +8,7 @@ public class KochFactory {
 
     public KochFactory(){}
 
-    public Koch createMitarbeiter(String mitarbeiternamen, String mitarbeitervornamen){
+    public Koch createKoch(String mitarbeiternamen, String mitarbeitervornamen){
 
         Koch m1 = new Koch(mitarbeiternamen, mitarbeitervornamen);
 

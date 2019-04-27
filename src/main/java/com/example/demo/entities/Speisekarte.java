@@ -16,6 +16,9 @@ public class Speisekarte {
     @JsonManagedReference
     private Set<Rezept> rezepte = new HashSet<>();
 
+    @OneToOne
+    private Manager manager;
+
     private String speisekarteNamen;
 
     public void addRezepte(Rezept rezept) {
