@@ -6,6 +6,8 @@ import java.util.Set;
 
 @Entity
 public class Koch extends Mitarbeiter{
+
+
     protected Koch (){}
 
 
