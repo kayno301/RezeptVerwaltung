@@ -10,7 +10,27 @@ public class Manager extends Mitarbeiter {
     @OneToOne
     private Speisekarte speisekarte;
 
-    public Manager( String mitarbeitername, String mitarbeitervornamen) {
+    public Manager(Speisekarte speisekarte) {
+        this.speisekarte = speisekarte;
+    }
+
+    public Manager(String mitarbeitername, String mitarbeitervornamen, Speisekarte speisekarte) {
         super(mitarbeitername, mitarbeitervornamen);
+        this.speisekarte = speisekarte;
+    }
+
+    public Speisekarte getSpeisekarte() {
+        return speisekarte;
+    }
+
+    public void setSpeisekarte(Speisekarte speisekarte) {
+        this.speisekarte = speisekarte;
+    }
+
+    @Override
+    public String toString() {
+        return "Manager{" +
+                "speisekarte=" + speisekarte +
+                '}';
     }
 }

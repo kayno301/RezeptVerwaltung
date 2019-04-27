@@ -23,24 +23,21 @@ public class ManagerController {
     @Autowired
     private ManagerRepository managerRepository;
 
-    /**
-     * Alle Kunden auslesen
-     * @return
-     */
+
     @RequestMapping(path = "/manager", method = RequestMethod.GET)
-    public List<Manager> getAllRezept() {
+    public List<Manager> getAllManager() {
         return (List<Manager>) managerRepository.findAll();
     }
 
     /**
-     * Einen bestimmten Kunden auslesen
+     * Einen bestimmten Manager auslesen
      * @return
      */
     @RequestMapping(path="/manager/{id}", method = RequestMethod.GET)
-    public ResponseEntity<?> getRezeptById(@PathVariable("id") Long id ) {
-        Manager r1 = managerRepository.findOne(id);
-        if ( r1 == null ) return ResponseEntity.notFound().build();
-        else return ResponseEntity.ok().body( r1 );
+    public ResponseEntity<?> getMangerById(@PathVariable("id") Long id ) {
+        Manager m1 = managerRepository.findOne(id);
+        if ( m1 == null ) return ResponseEntity.notFound().build();
+        else return ResponseEntity.ok().body( m1 );
     }
 
     /**
@@ -63,9 +60,10 @@ public class ManagerController {
      */
     @RequestMapping(value = "/manager", method = RequestMethod.POST)
     public ResponseEntity <?> persistPerson(
-            @RequestParam("mitarbeiterName") String mitarbeiterName, @RequestParam("mitarbeiterVornamen") String mitarbeiterVornamen)
+            @RequestParam("mitarbeiterName") String mitarbeiterName, @RequestParam("mitarbeiterVornamen") String mitarbeiterVornamen,@RequestParam("speise")Speisekarte speisekarte1)
+
     {
-        Manager k = managerRepository.save(new ManagerFactory().createManager(mitarbeiterName, mitarbeiterVornamen));
+        Manager k = managerRepository.save(new ManagerFactory().createManager(mitarbeiterName, mitarbeiterVornamen,speisekarte1));
         URI location = ServletUriComponentsBuilder.fromCurrentRequestUri()
                 .path("/{id}").buildAndExpand( k.getId() ).toUri();
         return ResponseEntity.created( location ).body( k );
