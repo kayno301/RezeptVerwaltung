@@ -31,7 +31,7 @@ public class KochController {
      * @return
      */
     @RequestMapping(path = "/koch", method = RequestMethod.GET)
-    public List<Koch> getAllRezept() {
+    public List<Koch> getAllKoch() {
         return (List<Koch>) kochReporsitory.findAll();
     }
 
@@ -40,7 +40,7 @@ public class KochController {
      * @return
      */
     @RequestMapping(path="/koch/{id}", method = RequestMethod.GET)
-    public ResponseEntity<?> getRezeptById(@PathVariable("id") Long id ) {
+    public ResponseEntity<?> getKochById(@PathVariable("id") Long id ) {
         Koch r1 = kochReporsitory.findOne(id);
         if ( r1 == null ) return ResponseEntity.notFound().build();
         else return ResponseEntity.ok().body( r1 );
@@ -51,7 +51,7 @@ public class KochController {
      * @return
      */
     @RequestMapping(path="/koch/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<?> deleteRezept(@PathVariable("id") Long id) {
+    public ResponseEntity<?> deleteKoch(@PathVariable("id") Long id) {
         if ( kochReporsitory.exists(id) ) {
             kochReporsitory.delete(id);
             return ResponseEntity.ok().build();

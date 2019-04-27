@@ -62,11 +62,11 @@ public class RezeptController {
      */
     @RequestMapping(value = "/rezept", method = RequestMethod.POST)
     public ResponseEntity <?> persistPerson(
-            @RequestParam("speisekartenNamen") String speisekartenNamen, @RequestParam("rezeptNamen") String rezeptNamen,
+            @RequestParam("rezeptNamen") String rezeptNamen,
             @RequestParam("rezeptBeschreibung") String rezeptBeschreibung, @RequestParam("rezeptZutaten") String rezeptZutaten,
             @RequestParam("kategorieName") Kategorie kategorieName, @RequestParam("koch") Koch koch1)
     {
-        Rezept k = rezeptReporsitory.save(new RezeptFactory().createRezept(speisekartenNamen, rezeptNamen, rezeptBeschreibung, rezeptZutaten,
+        Rezept k = rezeptReporsitory.save(new RezeptFactory().createRezept( rezeptNamen, rezeptBeschreibung, rezeptZutaten,
                                              kategorieName, koch1));
         URI location = ServletUriComponentsBuilder.fromCurrentRequestUri()
                 .path("/{id}").buildAndExpand( k.getId() ).toUri();

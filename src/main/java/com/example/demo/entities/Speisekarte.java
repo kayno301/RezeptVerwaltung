@@ -42,6 +42,12 @@ public class Speisekarte {
         this.speisekarteNamen = speisekarteNamen;
     }
 
+    public Speisekarte(Set<Rezept> rezepte, Manager manager, String speisekarteNamen) {
+        this.rezepte = rezepte;
+        this.manager = manager;
+        this.speisekarteNamen = speisekarteNamen;
+    }
+
     public Long getId() {
         return id;
     }
@@ -64,5 +70,13 @@ public class Speisekarte {
 
     public void setSpeisekarteNamen(String speisekarteNamen) {
         this.speisekarteNamen = speisekarteNamen;
+    }
+
+    public Manager getManager() {
+        return manager;
+    }
+
+    public void setManager(Manager manager) {
+        this.manager = manager;
     }
 }

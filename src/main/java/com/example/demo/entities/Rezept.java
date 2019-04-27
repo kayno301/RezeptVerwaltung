@@ -115,13 +115,13 @@ public class Rezept {
 
     public Rezept (String rezeptNamen,
                    String rezeptBeschreibung,
-                   String rezeptZutaten,
-                   Speisekarte speisekarte
+                   String rezeptZutaten
+
                    /*Kategorie kategorie*/){
         this.rezeptNamen = rezeptNamen;
         this.rezeptBeschreibung = rezeptBeschreibung;
         this.rezeptZutaten = rezeptZutaten;
-        this.speisekarte = speisekarte;
+
         //this.kategorie = kategorie;
 
     }
