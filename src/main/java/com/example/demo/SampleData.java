@@ -40,13 +40,16 @@ public class SampleData implements ApplicationListener<ContextRefreshedEvent> {
 
         spRep.save(new RezeptFactory().createRezept( "Spaghetti", "Jaja", "Reiss", k1, koch1));
 
-        Speisekarte s1 = new SpeisekarteFactory().createSpeisekarte("Restaurant", r1);
+
 
         Zutat z1 = new ZutatFactory().createZutat("Zitrone", 2);
         zutatReporsitory.save(z1);
-        sRep.save(s1);
-        Manager m2=new ManagerFactory().createManager("Kamal","Hida",s1);
+
+        Manager m2=new ManagerFactory().createManager("Kamal","Hida", new SpeisekarteFactory().createSpeisekarte("Restaurant", r1, m2));
         managerRepository.save(m2);
+
+
+
     }
 
 

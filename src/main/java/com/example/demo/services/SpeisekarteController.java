@@ -1,5 +1,6 @@
 package com.example.demo.services;
 
+import com.example.demo.entities.Manager;
 import com.example.demo.entities.Rezept;
 import com.example.demo.entities.Speisekarte;
 import com.example.demo.factories.SpeisekarteFactory;
@@ -57,9 +58,9 @@ public class SpeisekarteController {
      * @return
      */
     @RequestMapping(value = "/speisekarte", method = RequestMethod.POST)
-    public ResponseEntity <?> persistPerson(@RequestParam("s1") String s1, @RequestParam("rezept") Rezept rezept
+    public ResponseEntity <?> persistPerson(@RequestParam("s1") String s1, @RequestParam("rezept") Rezept rezept,  @RequestParam("manager") Manager manager
              )    {
-        Speisekarte k = speisekarteRepository.save(new SpeisekarteFactory().createSpeisekarte(s1, rezept));
+        Speisekarte k = speisekarteRepository.save(new SpeisekarteFactory().createSpeisekarte(s1, rezept, manager));
         URI location = ServletUriComponentsBuilder.fromCurrentRequestUri()
                 .path("/{id}").buildAndExpand( k.getId() ).toUri();
         return ResponseEntity.created( location ).body( k );

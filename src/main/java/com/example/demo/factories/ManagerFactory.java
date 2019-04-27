@@ -10,15 +10,18 @@ public class ManagerFactory {
 
     public ManagerFactory(){}
 
+
+
     public Manager createManager(String mitarbeiternamen, String mitarbeitervornamen, Speisekarte speisekarte){
 
 
-        Manager m1 = new Manager(mitarbeiternamen, mitarbeitervornamen,speisekarte);
+        Manager m1 = new Manager(mitarbeiternamen, mitarbeitervornamen);
         m1.setMitarbeitername(mitarbeiternamen);
         m1.setMitarbeitervornamen(mitarbeitervornamen);
-        Speisekarte speisekarte1=speisekarte;
-        m1.setSpeisekarte(speisekarte1);
-
+        if (!speisekarte.equals("Restaurant")) {
+            Speisekarte speisekarte1 = new Speisekarte("Restaurant");
+            m1.setSpeisekarte(speisekarte1);
+        }
 
 
         return m1;
