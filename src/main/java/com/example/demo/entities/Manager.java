@@ -12,9 +12,9 @@ public class Manager extends Mitarbeiter {
 
 
 
-    public Manager(String mitarbeitername, String mitarbeitervornamen, Speisekarte speisekarte) {
+    public Manager(String mitarbeitername, String mitarbeitervornamen) {
         super(mitarbeitername, mitarbeitervornamen);
-        this.speisekarte = speisekarte;
+
     }
 
     public Speisekarte getSpeisekarte() {

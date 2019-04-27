@@ -60,7 +60,7 @@ public class ManagerController {
      */
     @RequestMapping(value = "/manager", method = RequestMethod.POST)
     public ResponseEntity <?> persistPerson(
-            @RequestParam("mitarbeiterName") String mitarbeiterName, @RequestParam("mitarbeiterVornamen") String mitarbeiterVornamen,@RequestParam("speise")Speisekarte speisekarte1)
+            @RequestParam("mitarbeiterName") String mitarbeiterName, @RequestParam("mitarbeiterVornamen") String mitarbeiterVornamen,@RequestParam("speisekarte")Speisekarte speisekarte1)
 
     {
         Manager k = managerRepository.save(new ManagerFactory().createManager(mitarbeiterName, mitarbeiterVornamen,speisekarte1));
