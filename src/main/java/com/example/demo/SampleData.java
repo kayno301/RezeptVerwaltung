@@ -1,12 +1,14 @@
 package com.example.demo;
 
 import com.example.demo.entities.Koch;
+import com.example.demo.entities.Manager;
 import com.example.demo.entities.Rezept;
 import com.example.demo.entities.Speisekarte;
 import com.example.demo.factories.KochFactory;
 import com.example.demo.factories.RezeptFactory;
 import com.example.demo.factories.SpeisekarteFactory;
 import com.example.demo.reporsitories.KochReporsitory;
+import com.example.demo.reporsitories.ManagerRepository;
 import com.example.demo.reporsitories.RezeptReporsitory;
 import com.example.demo.reporsitories.SpeisekarteReporsitory;
 import com.example.demo.valueObjects.Kategorie;
@@ -26,12 +28,16 @@ public class SampleData implements ApplicationListener<ContextRefreshedEvent> {
 
     @Autowired
     private SpeisekarteReporsitory sRep;
+    @Autowired
+    private ManagerRepository managerRepository;
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent arg0) {
 
 
+
         Speisekarte s1 = new Speisekarte ("Speisekarte Retsaurant");
+
 
 
         Kategorie k1 = new Kategorie ("Vegan");
@@ -41,6 +47,7 @@ public class SampleData implements ApplicationListener<ContextRefreshedEvent> {
         spRep.save(r1);
 
         spRep.save(new RezeptFactory().createRezept( "Spaghetti", "Jaja", "Reiss", k1, koch1));
+        Manager m2=new Manager("Kamal","Hida",s1);
 
     }
 

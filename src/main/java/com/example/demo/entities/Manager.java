@@ -10,9 +10,7 @@ public class Manager extends Mitarbeiter {
     @OneToOne
     private Speisekarte speisekarte;
 
-    public Manager(Speisekarte speisekarte) {
-        this.speisekarte = speisekarte;
-    }
+
 
     public Manager(String mitarbeitername, String mitarbeitervornamen, Speisekarte speisekarte) {
         super(mitarbeitername, mitarbeitervornamen);
