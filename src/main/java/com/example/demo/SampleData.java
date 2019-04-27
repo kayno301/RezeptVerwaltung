@@ -37,10 +37,10 @@ public class SampleData implements ApplicationListener<ContextRefreshedEvent> {
 
 
 
-        Speisekarte s1 = new Speisekarte ("Speisekarte Retsaurant");
+        Speisekarte s1 = new SpeisekarteFactory().createSpeisekarte("Restaurant");
 
 
-
+        sRep.save(s1);
         Kategorie k1 = new Kategorie ("Vegan");
         Koch koch1 = new KochFactory().createKoch("Max", "Mustermann");
         miRep.save(koch1);
