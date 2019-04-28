@@ -1,7 +1,5 @@
 package com.example.demo.entities;
 
-
-
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.HashSet;
@@ -15,7 +13,7 @@ public class Zutat {
     private String zutatName;
     private int zutatMenge;
 
-    @ManyToMany(cascade= CascadeType.MERGE,fetch= FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     private Set<Rezept> rezepte = new HashSet<>();
 
     public Zutat() {

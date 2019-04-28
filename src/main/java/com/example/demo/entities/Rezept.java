@@ -4,17 +4,14 @@ import com.example.demo.valueObjects.Kategorie;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 public class Rezept {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
 
     @ManyToOne() // cascade = CascadeType.ALL
     @JsonBackReference
@@ -24,7 +21,7 @@ public class Rezept {
     private Koch koch;
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private Set<Zutat> zutat = new HashSet<>();
+    private Set<Zutat> zutaten = new HashSet<>();
 
     private String rezeptName;
     private String rezeptBeschreibung;
@@ -33,7 +30,8 @@ public class Rezept {
     @Embedded
     private Kategorie kategorie;
 
-    protected Rezept (){}
+    protected Rezept() {
+    }
 
     public Rezept(Speisekarte speisekarte, String rezeptNamen, String rezeptBeschreibung,
                   String rezeptZutaten, Kategorie kategorie, Set<Zutat> zutat) {
@@ -42,7 +40,7 @@ public class Rezept {
         this.rezeptBeschreibung = rezeptBeschreibung;
         this.rezeptZutaten = rezeptZutaten;
         this.kategorie = kategorie;
-        this.zutat= zutat;
+        this.zutaten = zutat;
     }
 
     public Long getId() {
@@ -73,15 +71,11 @@ public class Rezept {
     }
 
     public String getRezeptNamen() {
-
-
         return rezeptName;
     }
 
     public void setRezeptNamen(String rezeptNamen) {
         this.rezeptName = rezeptNamen;
-              
-
     }
 
     public String getRezeptBeschreibung() {
@@ -101,11 +95,11 @@ public class Rezept {
     }
 
     public Set<Zutat> getZutat() {
-        return zutat;
+        return zutaten;
     }
 
     public void setZutat(Set<Zutat> zutat) {
-        this.zutat = zutat;
+        this.zutaten = zutat;
     }
 
     public Kategorie getKategorie() {
@@ -116,17 +110,14 @@ public class Rezept {
         this.kategorie = kategorie;
     }
 
-    public Rezept (String rezeptNamen,
-                   String rezeptBeschreibung,
-                   String rezeptZutaten
-
-                   /*Kategorie kategorie*/){
+    public Rezept(String rezeptNamen,
+                  String rezeptBeschreibung,
+                  String rezeptZutaten
+            /*Kategorie kategorie*/) {
         this.rezeptName = rezeptNamen;
         this.rezeptBeschreibung = rezeptBeschreibung;
         this.rezeptZutaten = rezeptZutaten;
-
         //this.kategorie = kategorie;
-
     }
 
     @Override
@@ -137,7 +128,7 @@ public class Rezept {
                 ", rezeptNamen='" + rezeptName + '\'' +
                 ", rezeptBeschreibung='" + rezeptBeschreibung + '\'' +
                 ", rezeptZutaten='" + rezeptZutaten + '\'' +
-                ", kategorie='" +  kategorie + "\'" +
+                ", kategorie='" + kategorie + "\'" +
                 '}';
     }
 }

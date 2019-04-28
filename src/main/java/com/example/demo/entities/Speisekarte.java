@@ -29,14 +29,15 @@ public class Speisekarte {
     }
 
     public String toString() {
-        String retVal = "Speisekarte Namen: " + speisekarteNamen ;
+        String retVal = "Speisekarte Namen: " + speisekarteNamen;
         // for (Rezept rezept : rezepte) {
         //     retVal += rezept.toString();
         // }
         return retVal;
     }
 
-    protected Speisekarte(){}
+    protected Speisekarte() {
+    }
 
     public Speisekarte(String speisekarteNamen) {
         this.speisekarteNamen = speisekarteNamen;

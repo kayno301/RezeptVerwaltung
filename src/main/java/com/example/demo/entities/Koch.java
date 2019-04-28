@@ -1,20 +1,20 @@
 package com.example.demo.entities;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-public class Koch extends Mitarbeiter{
+public class Koch extends Mitarbeiter {
+    protected Koch() {
+    }
 
-
-    protected Koch (){}
-
-
-    @OneToMany( cascade = CascadeType.PERSIST)
+    @OneToMany(cascade = CascadeType.PERSIST)
     private Set<Rezept> rezepte = new HashSet<>();
 
-    public Koch( String mitarbeitername, String mitarbeitervornamen) {
+    public Koch(String mitarbeitername, String mitarbeitervornamen) {
         super(mitarbeitername, mitarbeitervornamen);
     }
 

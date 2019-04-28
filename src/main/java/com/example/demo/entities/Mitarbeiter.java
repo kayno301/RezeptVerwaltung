@@ -1,12 +1,11 @@
 package com.example.demo.entities;
 
-import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 @Entity
 public abstract class Mitarbeiter {
-
     @Id
     @GeneratedValue
     private Long id;
@@ -14,9 +13,10 @@ public abstract class Mitarbeiter {
     private String mitarbeitername;
     private String mitarbeitervornamen;
 
-    protected Mitarbeiter (){}
+    protected Mitarbeiter() {
+    }
 
-    public Mitarbeiter( String mitarbeitername, String mitarbeitervornamen) {
+    public Mitarbeiter(String mitarbeitername, String mitarbeitervornamen) {
         this.mitarbeitername = mitarbeitername;
         this.mitarbeitervornamen = mitarbeitervornamen;
     }
@@ -28,7 +28,6 @@ public abstract class Mitarbeiter {
     public void setId(Long id) {
         this.id = id;
     }
-
 
     public String getMitarbeitername() {
         return mitarbeitername;
@@ -46,8 +45,7 @@ public abstract class Mitarbeiter {
         this.mitarbeitervornamen = mitarbeitervornamen;
     }
 
-
-    public String toString(){
+    public String toString() {
         return this.mitarbeitername + " " + this.mitarbeitervornamen;
     }
 }
