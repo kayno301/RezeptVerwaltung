@@ -17,6 +17,8 @@ public class SpeisekarteFactory {
 
         speisekarten.setManager(manager);
 
+        
+
 
 
         return speisekarten ;

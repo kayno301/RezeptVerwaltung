@@ -33,9 +33,6 @@ public class Rezept {
     @Embedded
     private Kategorie kategorie;
 
-
-
-
     protected Rezept (){}
 
     public Rezept(Speisekarte speisekarte, String rezeptNamen, String rezeptBeschreibung,
