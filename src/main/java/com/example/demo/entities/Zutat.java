@@ -15,7 +15,7 @@ public class Zutat {
     private String zutatName;
     private int zutatMenge;
 
-    @ManyToMany(mappedBy = "zutaten" ,cascade= CascadeType.ALL,fetch= FetchType.EAGER)
+    @ManyToMany(mappedBy = "zutaten", cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
     private Set<Rezept> rezepte = new HashSet<>();
 
     public Zutat() {

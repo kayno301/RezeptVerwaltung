@@ -22,7 +22,7 @@ public class Rezept {
     @ManyToOne
     private Koch koch;
 
-    @ManyToMany(cascade = CascadeType.PERSIST)
+    @ManyToMany(fetch = FetchType.LAZY)
     private Set<Zutat> zutaten = new HashSet<>();
 
     private String rezeptName;

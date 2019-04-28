@@ -58,9 +58,9 @@ public class ZutatController {
      */
     @RequestMapping(value = "/zutat", method = RequestMethod.POST)
     public ResponseEntity <?> persistPerson(
-            @RequestParam("zutatNamen") String zutatNamen, @RequestParam("zutatMenge") int zutatMenge, @RequestParam("rezept") Rezept rezept)
+            @RequestParam("zutatNamen") String zutatNamen, @RequestParam("zutatMenge") int zutatMenge)
     {
-        Zutat k = zutatRep.save(new ZutatFactory().createZutat(zutatNamen, zutatMenge, rezept));
+        Zutat k = zutatRep.save(new ZutatFactory().createZutat(zutatNamen, zutatMenge));
         URI location = ServletUriComponentsBuilder.fromCurrentRequestUri()
                 .path("/{id}").buildAndExpand( k.getId() ).toUri();
         return ResponseEntity.created( location ).body( k );
