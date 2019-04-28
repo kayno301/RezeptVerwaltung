@@ -4,43 +4,47 @@ import com.example.demo.valueObjects.Kategorie;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 public class Rezept {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @ManyToOne() // cascade = CascadeType.ALL
-    @JsonBackReference
+
+    @ManyToOne // cascade = CascadeType.ALL
     private Speisekarte speisekarte;
 
     @ManyToOne
     private Koch koch;
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToMany(cascade = CascadeType.PERSIST)
     private Set<Zutat> zutaten = new HashSet<>();
 
     private String rezeptName;
     private String rezeptBeschreibung;
-    private String rezeptZutaten;
+
+
+    public void addZutat(Zutat b) {
+        this.zutaten.add(b);
+        b.getRezepte().add(this);
+    }
 
     @Embedded
     private Kategorie kategorie;
 
-    protected Rezept() {
-    }
+    protected Rezept (){}
 
-    public Rezept(Speisekarte speisekarte, String rezeptNamen, String rezeptBeschreibung,
-                  String rezeptZutaten, Kategorie kategorie, Set<Zutat> zutat) {
+    public Rezept(Speisekarte speisekarte, String rezeptNamen, String rezeptBeschreibung, Kategorie kategorie) {
         this.speisekarte = speisekarte;
         this.rezeptName = rezeptNamen;
         this.rezeptBeschreibung = rezeptBeschreibung;
-        this.rezeptZutaten = rezeptZutaten;
+
         this.kategorie = kategorie;
-        this.zutaten = zutat;
     }
 
     public Long getId() {
@@ -71,11 +75,23 @@ public class Rezept {
     }
 
     public String getRezeptNamen() {
+
+
         return rezeptName;
     }
 
     public void setRezeptNamen(String rezeptNamen) {
         this.rezeptName = rezeptNamen;
+
+
+    }
+
+    public String getRezeptName() {
+        return rezeptName;
+    }
+
+    public void setRezeptName(String rezeptName) {
+        this.rezeptName = rezeptName;
     }
 
     public String getRezeptBeschreibung() {
@@ -86,20 +102,13 @@ public class Rezept {
         this.rezeptBeschreibung = rezeptBeschreibung;
     }
 
-    public String getRezeptZutaten() {
-        return rezeptZutaten;
-    }
 
-    public void setRezeptZutaten(String rezeptZutaten) {
-        this.rezeptZutaten = rezeptZutaten;
-    }
-
-    public Set<Zutat> getZutat() {
+    public Set<Zutat> getZutaten() {
         return zutaten;
     }
 
-    public void setZutat(Set<Zutat> zutat) {
-        this.zutaten = zutat;
+    public void setZutaten(Set<Zutat> zutaten) {
+        this.zutaten = zutaten;
     }
 
     public Kategorie getKategorie() {
@@ -110,14 +119,15 @@ public class Rezept {
         this.kategorie = kategorie;
     }
 
-    public Rezept(String rezeptNamen,
-                  String rezeptBeschreibung,
-                  String rezeptZutaten
-            /*Kategorie kategorie*/) {
+    public Rezept (String rezeptNamen,
+                   String rezeptBeschreibung
+
+                   /*Kategorie kategorie*/){
         this.rezeptName = rezeptNamen;
         this.rezeptBeschreibung = rezeptBeschreibung;
-        this.rezeptZutaten = rezeptZutaten;
+
         //this.kategorie = kategorie;
+
     }
 
     @Override
@@ -127,8 +137,7 @@ public class Rezept {
                 ", speisekarte=" + speisekarte +
                 ", rezeptNamen='" + rezeptName + '\'' +
                 ", rezeptBeschreibung='" + rezeptBeschreibung + '\'' +
-                ", rezeptZutaten='" + rezeptZutaten + '\'' +
-                ", kategorie='" + kategorie + "\'" +
+                ", kategorie='" +  kategorie + "\'" +
                 '}';
     }
 }

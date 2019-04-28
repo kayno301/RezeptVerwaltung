@@ -1,8 +1,5 @@
 package com.example.demo;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import com.example.demo.entities.*;
 import com.example.demo.factories.*;
 import com.example.demo.reporsitories.*;
@@ -52,8 +49,9 @@ public class SampleData implements ApplicationListener<ContextRefreshedEvent> {
         Speisekarte speisekarte = new SpeisekarteFactory().createSpeisekarte("Restaurant", manager);
         speisekartenReporsitory.save(speisekarte);
 
-        Rezept rezeptSpaghetti = new RezeptFactory().createRezept("Spaghetti", "Jaja", "Reiss", kategorieVegan, koch1, speisekarte);
-        Rezept rezeptPizza = new RezeptFactory().createRezept("Pizza", "Magaritha", "Käse, Tomatensoße, Pizzateig", kategorieFastFood, koch2, speisekarte);
+        Rezept rezeptSpaghetti = new RezeptFactory().createRezept("Spaghetti", "Jaja", kategorieVegan, koch1, speisekarte);
+        Rezept rezeptPizza = new RezeptFactory().createRezept("Pizza", "Magaritha", kategorieFastFood, koch2, speisekarte);
+        // String rezeptNamen, String rezeptBeschreibung,  Kategorie kategorieName, Koch koch1, Speisekarte speisekarte
         rezeptReporsitory.save(rezeptSpaghetti);
         rezeptReporsitory.save(rezeptPizza);        
         
