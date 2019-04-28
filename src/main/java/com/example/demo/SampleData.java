@@ -1,5 +1,8 @@
 package com.example.demo;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import com.example.demo.entities.*;
 import com.example.demo.factories.*;
 import com.example.demo.reporsitories.*;
@@ -19,6 +22,7 @@ public class SampleData implements ApplicationListener<ContextRefreshedEvent> {
 
     @Autowired
     private SpeisekarteReporsitory speisekartenReporsitory;
+
     @Autowired
     private ManagerRepository managerReporsitory;
 
@@ -27,29 +31,35 @@ public class SampleData implements ApplicationListener<ContextRefreshedEvent> {
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent arg0) {
-        Kategorie kategorie1 = new Kategorie("Vegan");
+        Kategorie kategorieVegan = new Kategorie("Vegan");
+        Kategorie kategorieFastFood = new Kategorie("FastFood");
+
         Koch koch1 = new KochFactory().createKoch("Max", "Mustermann");
+        Koch koch2 = new KochFactory().createKoch("Mario", "Italia");
         kochReporsitory.save(koch1);
+        kochReporsitory.save(koch2);
 
-        Zutat zutat1 = new ZutatFactory().createZutat("Zitrone", 2);
-        zutatReporsitory.save(zutat1);
+        Zutat zutatSpaghetti = new ZutatFactory().createZutat("Spaghetti", 2);
+        Zutat zutatKaese = new ZutatFactory().createZutat("Käse", 1000);
+        Zutat zutatPizzateig = new ZutatFactory().createZutat("Pizzateig", 2500); 
+        zutatReporsitory.save(zutatSpaghetti);
+        zutatReporsitory.save(zutatKaese);
+        zutatReporsitory.save(zutatPizzateig);
 
-        Manager manager2 = new ManagerFactory().createManager("Kamal", "Hida");
-        managerReporsitory.save(manager2);
+        Manager manager = new ManagerFactory().createManager("Hida", "Kamal");
+        managerReporsitory.save(manager);
 
-        Speisekarte speisekarte2 = new SpeisekarteFactory().createSpeisekarte("Restaurant", manager2);
-        speisekartenReporsitory.save(speisekarte2);
+        Speisekarte speisekarte = new SpeisekarteFactory().createSpeisekarte("Restaurant", manager);
+        speisekartenReporsitory.save(speisekarte);
 
-        Rezept rezept1 = new RezeptFactory().createRezept("Spaghetti", "Jaja", "Reiss", kategorie1, koch1, speisekarte2);
-        rezeptReporsitory.save(rezept1);
-        //spRep.save(new RezeptFactory().createRezept( "Spaghetti", "Jaja", "Reiss", k1, koch1, s2));
-
-        //      find method to list all workers called Kamal
-        /*List<Koch>kochList=miRep.findByMitarbeitername("Kamal");
-        for(Koch koch:kochList) {
-            System.out.println(koch.getMitarbeitername());
-        }*/
+        Rezept rezeptSpaghetti = new RezeptFactory().createRezept("Spaghetti", "Jaja", "Reiss", kategorieVegan, koch1, speisekarte);
+        Rezept rezeptPizza = new RezeptFactory().createRezept("Pizza", "Magaritha", "Käse, Tomatensoße, Pizzateig", kategorieFastFood, koch2, speisekarte);
+        rezeptReporsitory.save(rezeptSpaghetti);
+        rezeptReporsitory.save(rezeptPizza);        
+        
         System.out.println(rezeptReporsitory.findByRezeptName("Spaghetti"));
+        System.out.println(rezeptReporsitory.findByRezeptName("Pizza"));
+        System.out.println(speisekartenReporsitory.findByManager(managerReporsitory.findByMitarbeitername("Hida").get(0)));
     }
 
     public SampleData() {
