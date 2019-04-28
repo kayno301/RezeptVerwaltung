@@ -51,6 +51,7 @@ public class SampleData implements ApplicationListener<ContextRefreshedEvent> {
         for(Koch koch:kochList) {
             System.out.println(koch.getMitarbeitername());
         }*/
+        System.out.println(spRep.findByRezeptName("Spaghetti").toString());
     }
 
     public SampleData() {

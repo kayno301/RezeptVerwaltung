@@ -16,7 +16,7 @@ public class Zutat {
     private int zutatMenge;
 
     @ManyToMany(cascade= CascadeType.MERGE,fetch= FetchType.EAGER)
-    private Set<Rezept> rezept = new HashSet<>();
+    private Set<Rezept> rezepte = new HashSet<>();
 
     public Zutat() {
     }
@@ -26,10 +26,10 @@ public class Zutat {
         this.zutatMenge = zutatMenge;
     }
 
-    public Zutat(String zutatName, int zutatMenge, Set<Rezept> rezept) {
+    public Zutat(String zutatName, int zutatMenge, Set<Rezept> rezepte) {
         this.zutatName = zutatName;
         this.zutatMenge = zutatMenge;
-        this.rezept = rezept;
+        this.rezepte = rezepte;
     }
 
     public Long getId() {
@@ -56,12 +56,12 @@ public class Zutat {
         this.zutatMenge = zutatMenge;
     }
 
-    public Collection<Rezept> getRezepts() {
-        return rezept;
+    public Collection<Rezept> getRezepte() {
+        return rezepte;
     }
 
-    public void setRezepts(Set<Rezept> rezept) {
-        this.rezept = rezept;
+    public void setRezepte(Set<Rezept> rezept) {
+        this.rezepte = rezept;
     }
 
     @Override
@@ -70,7 +70,7 @@ public class Zutat {
                 "id=" + id +
                 ", zutatName='" + zutatName + '\'' +
                 ", zutatMenge=" + zutatMenge +
-                ", rezepts=" + rezept +
+                ", rezepts=" + rezepte +
                 '}';
     }
 }

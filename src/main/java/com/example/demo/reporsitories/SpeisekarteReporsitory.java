@@ -7,5 +7,5 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 
 public interface SpeisekarteReporsitory extends CrudRepository<Speisekarte, Long> {
-
+    public List<Speisekarte> findBySpeisekarteNamen(String speisekarteNamen);
 }

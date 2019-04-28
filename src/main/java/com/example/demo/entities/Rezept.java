@@ -26,7 +26,7 @@ public class Rezept {
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Set<Zutat> zutat = new HashSet<>();
 
-    private String rezeptNamen;
+    private String rezeptName;
     private String rezeptBeschreibung;
     private String rezeptZutaten;
 
@@ -38,7 +38,7 @@ public class Rezept {
     public Rezept(Speisekarte speisekarte, String rezeptNamen, String rezeptBeschreibung,
                   String rezeptZutaten, Kategorie kategorie, Set<Zutat> zutat) {
         this.speisekarte = speisekarte;
-        this.rezeptNamen = rezeptNamen;
+        this.rezeptName = rezeptNamen;
         this.rezeptBeschreibung = rezeptBeschreibung;
         this.rezeptZutaten = rezeptZutaten;
         this.kategorie = kategorie;
@@ -73,11 +73,15 @@ public class Rezept {
     }
 
     public String getRezeptNamen() {
-        return rezeptNamen;
+
+
+        return rezeptName;
     }
 
     public void setRezeptNamen(String rezeptNamen) {
-        this.rezeptNamen = rezeptNamen;
+        this.rezeptName = rezeptNamen;
+              
+
     }
 
     public String getRezeptBeschreibung() {
@@ -117,7 +121,7 @@ public class Rezept {
                    String rezeptZutaten
 
                    /*Kategorie kategorie*/){
-        this.rezeptNamen = rezeptNamen;
+        this.rezeptName = rezeptNamen;
         this.rezeptBeschreibung = rezeptBeschreibung;
         this.rezeptZutaten = rezeptZutaten;
 
@@ -130,10 +134,10 @@ public class Rezept {
         return "Rezept{" +
                 "id=" + id +
                 ", speisekarte=" + speisekarte +
-                ", rezeptNamen='" + rezeptNamen + '\'' +
+                ", rezeptNamen='" + rezeptName + '\'' +
                 ", rezeptBeschreibung='" + rezeptBeschreibung + '\'' +
                 ", rezeptZutaten='" + rezeptZutaten + '\'' +
-                ", kategorie='" + /* kategorie + */"\'" +
+                ", kategorie='" +  kategorie + "\'" +
                 '}';
     }
 }

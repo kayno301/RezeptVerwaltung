@@ -7,8 +7,5 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 
 public interface KochReporsitory extends CrudRepository<Koch, Long> {
-
-public List<Koch> findByMitarbeitername(String mitarbeitername);
-
-
+    public List<Koch> findByMitarbeitername(String mitarbeitername);
 }
