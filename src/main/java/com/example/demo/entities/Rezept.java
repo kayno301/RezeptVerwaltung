@@ -16,7 +16,7 @@ public class Rezept {
     private Long id;
 
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne() // cascade = CascadeType.ALL
     @JsonBackReference
     private Speisekarte speisekarte;
 

@@ -44,7 +44,7 @@ public class SampleData implements ApplicationListener<ContextRefreshedEvent> {
         sRep.save(s2);
         Rezept r1 = new RezeptFactory().createRezept( "Spaghetti", "Jaja", "Reiss", k1, koch1, s2);
         spRep.save(r1);
-        spRep.save(new RezeptFactory().createRezept( "Spaghetti", "Jaja", "Reiss", k1, koch1, s2));
+        //spRep.save(new RezeptFactory().createRezept( "Spaghetti", "Jaja", "Reiss", k1, koch1, s2));
 
         //      find method to list all workers called Kamal
         /*List<Koch>kochList=miRep.findByMitarbeitername("Kamal");
