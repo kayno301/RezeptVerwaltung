@@ -1,5 +1,6 @@
 package com.example.demo.services;
 
+import com.example.demo.entities.Rezept;
 import com.example.demo.entities.Zutat;
 import com.example.demo.factories.ZutatFactory;
 import com.example.demo.reporsitories.ZutatReporsitory;
@@ -57,9 +58,9 @@ public class ZutatController {
      */
     @RequestMapping(value = "/zutat", method = RequestMethod.POST)
     public ResponseEntity <?> persistPerson(
-            @RequestParam("zutatNamen") String zutatNamen, @RequestParam("zutatMenge") int zutatMenge)
+            @RequestParam("zutatNamen") String zutatNamen, @RequestParam("zutatMenge") int zutatMenge, @RequestParam("rezept") Rezept rezept)
     {
-        Zutat k = zutatRep.save(new ZutatFactory().createZutat(zutatNamen, zutatMenge));
+        Zutat k = zutatRep.save(new ZutatFactory().createZutat(zutatNamen, zutatMenge, rezept));
         URI location = ServletUriComponentsBuilder.fromCurrentRequestUri()
                 .path("/{id}").buildAndExpand( k.getId() ).toUri();
         return ResponseEntity.created( location ).body( k );

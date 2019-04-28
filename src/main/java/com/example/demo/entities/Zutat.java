@@ -15,7 +15,7 @@ public class Zutat {
     private String zutatName;
     private int zutatMenge;
 
-    @ManyToMany(cascade= CascadeType.MERGE,fetch= FetchType.EAGER)
+    @ManyToMany(mappedBy = "zutaten" ,cascade= CascadeType.ALL,fetch= FetchType.EAGER)
     private Set<Rezept> rezepte = new HashSet<>();
 
     public Zutat() {
@@ -30,6 +30,11 @@ public class Zutat {
         this.zutatName = zutatName;
         this.zutatMenge = zutatMenge;
         this.rezepte = rezepte;
+    }
+
+    public void addRezept(Rezept b) {
+        this.rezepte.add(b);
+        b.getZutaten().add(this);
     }
 
     public Long getId() {

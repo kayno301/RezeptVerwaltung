@@ -30,22 +30,26 @@ public class SampleData implements ApplicationListener<ContextRefreshedEvent> {
     @Override
     public void onApplicationEvent(ContextRefreshedEvent arg0) {
         Kategorie k1 = new Kategorie ("Vegan");
+        Kategorie k2 = new Kategorie ("Hausmannskost");
         Koch koch1 = new KochFactory().createKoch("Max", "Mustermann");
         miRep.save(koch1);
-        
+        Koch koch2 = new KochFactory().createKoch("Maximilian", "Herrmann");
+        miRep.save(koch2);
 
-        Zutat z1 = new ZutatFactory().createZutat("Zitrone", 2);
-        zutatReporsitory.save(z1);
+
 
 
         Manager m2 = new ManagerFactory().createManager("Kamal","Hida");
         managerRepository.save(m2);
         Speisekarte s2 = new SpeisekarteFactory().createSpeisekarte("Restaurant", m2);
         sRep.save(s2);
-        Rezept r1 = new RezeptFactory().createRezept( "Spaghetti", "Jaja", "Reiss", k1, koch1, s2);
+        Rezept r1 = new RezeptFactory().createRezept( "Spaghetti", "Jaja" , k1, koch2, s2);
         spRep.save(r1);
-        //spRep.save(new RezeptFactory().createRezept( "Spaghetti", "Jaja", "Reiss", k1, koch1, s2));
+        spRep.save(new RezeptFactory().createRezept( "Nudeln", "Kochen Sie die Nudeln", k1, koch1, s2));
+        spRep.save(new RezeptFactory().createRezept( "Fleisch", "Schneiden Sie das Fleisch", k2, koch1, s2));
 
+        Zutat z1 = new ZutatFactory().createZutat("Zitrone", 2, r1);
+        //zutatReporsitory.save(z1);
         //      find method to list all workers called Kamal
         /*List<Koch>kochList=miRep.findByMitarbeitername("Kamal");
         for(Koch koch:kochList) {

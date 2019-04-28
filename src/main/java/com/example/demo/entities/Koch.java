@@ -11,7 +11,7 @@ public class Koch extends Mitarbeiter{
     protected Koch (){}
 
 
-    @OneToMany( cascade = CascadeType.PERSIST)
+    @OneToMany( mappedBy = "koch", cascade = CascadeType.PERSIST)
     private Set<Rezept> rezepte = new HashSet<>();
 
     public Koch( String mitarbeitername, String mitarbeitervornamen) {

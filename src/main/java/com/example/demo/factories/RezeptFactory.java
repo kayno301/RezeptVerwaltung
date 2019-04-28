@@ -12,10 +12,10 @@ public class RezeptFactory {
 
     public RezeptFactory (){}
 
-    public Rezept createRezept ( String rezeptNamen, String rezeptBeschreibung, String rezeptZutaten,  Kategorie kategorieName, Koch koch1, Speisekarte speisekarte){
+    public Rezept createRezept ( String rezeptNamen, String rezeptBeschreibung,  Kategorie kategorieName, Koch koch1, Speisekarte speisekarte){
 
         Kategorie kategorieObj = kategorieName;
-        Rezept r1 = new Rezept(rezeptNamen, rezeptBeschreibung, rezeptZutaten);
+        Rezept r1 = new Rezept(rezeptNamen, rezeptBeschreibung);
 
 
 
