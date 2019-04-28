@@ -1,22 +1,18 @@
 package com.example.demo.entities;
 
 import com.example.demo.valueObjects.Kategorie;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 public class Rezept {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-
-    @ManyToOne // cascade = CascadeType.ALL
+    @ManyToOne
     private Speisekarte speisekarte;
 
     @ManyToOne
@@ -28,7 +24,6 @@ public class Rezept {
     private String rezeptName;
     private String rezeptBeschreibung;
 
-
     public void addZutat(Zutat b) {
         this.zutaten.add(b);
         b.getRezepte().add(this);
@@ -37,7 +32,8 @@ public class Rezept {
     @Embedded
     private Kategorie kategorie;
 
-    protected Rezept (){}
+    protected Rezept() {
+    }
 
     public Rezept(Speisekarte speisekarte, String rezeptNamen, String rezeptBeschreibung, Kategorie kategorie, Set<Zutat> zutaten) {
         this.speisekarte = speisekarte;
@@ -76,15 +72,11 @@ public class Rezept {
     }
 
     public String getRezeptNamen() {
-
-
         return rezeptName;
     }
 
     public void setRezeptNamen(String rezeptNamen) {
         this.rezeptName = rezeptNamen;
-              
-
     }
 
     public String getRezeptName() {
@@ -103,7 +95,6 @@ public class Rezept {
         this.rezeptBeschreibung = rezeptBeschreibung;
     }
 
-
     public Set<Zutat> getZutaten() {
         return zutaten;
     }
@@ -120,15 +111,10 @@ public class Rezept {
         this.kategorie = kategorie;
     }
 
-    public Rezept (String rezeptNamen,
-                   String rezeptBeschreibung
-
-                   /*Kategorie kategorie*/){
+    public Rezept(String rezeptNamen,
+                  String rezeptBeschreibung) {
         this.rezeptName = rezeptNamen;
         this.rezeptBeschreibung = rezeptBeschreibung;
-
-        //this.kategorie = kategorie;
-
     }
 
     @Override
@@ -138,7 +124,7 @@ public class Rezept {
                 ", speisekarte=" + speisekarte +
                 ", rezeptNamen='" + rezeptName + '\'' +
                 ", rezeptBeschreibung='" + rezeptBeschreibung + '\'' +
-                ", kategorie='" +  kategorie + "\'" +
+                ", kategorie='" + kategorie + "\'" +
                 '}';
     }
 }
