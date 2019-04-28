@@ -18,9 +18,10 @@ public class RezeptFactory {
         Rezept r1 = new Rezept(rezeptNamen, rezeptBeschreibung, rezeptZutaten);
 
 
+
+
+
         Koch koch = koch1;
-
-
 
         r1.setKategorie(kategorieName);
 

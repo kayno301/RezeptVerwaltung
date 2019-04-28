@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-public class Mitarbeiter {
+public abstract class Mitarbeiter {
 
     @Id
     @GeneratedValue
