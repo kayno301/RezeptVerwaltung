@@ -1,5 +1,6 @@
 package com.example.demo.entities;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 
@@ -7,7 +8,8 @@ import javax.persistence.OneToOne;
 public class Manager extends Mitarbeiter {
     protected Manager (){}
 
-    @OneToOne
+
+    @OneToOne(mappedBy = "manager", cascade = CascadeType.ALL)
     private Speisekarte speisekarte;
 
 
@@ -24,6 +26,8 @@ public class Manager extends Mitarbeiter {
     public void setSpeisekarte(Speisekarte speisekarte) {
         this.speisekarte = speisekarte;
     }
+
+
 
     @Override
     public String toString() {

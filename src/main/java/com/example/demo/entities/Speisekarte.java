@@ -77,6 +77,10 @@ public class Speisekarte {
     }
 
     public void setManager(Manager manager) {
+
+        if (this.manager != null)
+            this.setManager(null);
+
         this.manager = manager;
     }
 }

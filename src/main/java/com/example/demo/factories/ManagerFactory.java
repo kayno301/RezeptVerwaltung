@@ -12,16 +12,13 @@ public class ManagerFactory {
 
 
 
-    public Manager createManager(String mitarbeiternamen, String mitarbeitervornamen, Speisekarte speisekarte){
+    public Manager createManager(String mitarbeiternamen, String mitarbeitervornamen){
 
 
         Manager m1 = new Manager(mitarbeiternamen, mitarbeitervornamen);
         m1.setMitarbeitername(mitarbeiternamen);
         m1.setMitarbeitervornamen(mitarbeitervornamen);
-        if (!speisekarte.equals("Restaurant")) {
-            Speisekarte speisekarte1 = new Speisekarte("Restaurant");
-            m1.setSpeisekarte(speisekarte1);
-        }
+
 
 
         return m1;

@@ -58,9 +58,9 @@ public class SpeisekarteController {
      * @return
      */
     @RequestMapping(value = "/speisekarte", method = RequestMethod.POST)
-    public ResponseEntity <?> persistPerson(@RequestParam("s1") String s1, @RequestParam("rezept") Rezept rezept,  @RequestParam("manager") Manager manager
+    public ResponseEntity <?> persistPerson(@RequestParam("speisekartenNamen") String speisekartenNamen, @RequestParam("manager") Manager manager
              )    {
-        Speisekarte k = speisekarteRepository.save(new SpeisekarteFactory().createSpeisekarte(s1, rezept, manager));
+        Speisekarte k = speisekarteRepository.save(new SpeisekarteFactory().createSpeisekarte(speisekartenNamen, manager));
         URI location = ServletUriComponentsBuilder.fromCurrentRequestUri()
                 .path("/{id}").buildAndExpand( k.getId() ).toUri();
         return ResponseEntity.created( location ).body( k );

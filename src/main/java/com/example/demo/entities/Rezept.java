@@ -62,7 +62,9 @@ public class Rezept {
 
     public void setSpeisekarte(Speisekarte speisekarte) {
         this.speisekarte = speisekarte;
-
+        if (!speisekarte.getRezepte().contains(this)) {
+            speisekarte.getRezepte().add(this);
+        }
     }
 
     public Koch getKoch() {

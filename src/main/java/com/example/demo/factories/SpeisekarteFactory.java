@@ -11,12 +11,14 @@ public class SpeisekarteFactory {
 
     public SpeisekarteFactory (){}
 
-    public Speisekarte createSpeisekarte (String speisekartenNamen, Rezept rezept, Manager manager){
+    public Speisekarte createSpeisekarte (String speisekartenNamen, Manager manager){
 
         Speisekarte speisekarten = new Speisekarte(speisekartenNamen);
-        Manager manager1 = manager ;
 
-        speisekarten.setManager(manager1);
+        speisekarten.setManager(manager);
+
+
+
         return speisekarten ;
     }
 }

@@ -47,13 +47,17 @@ public class SampleData implements ApplicationListener<ContextRefreshedEvent> {
         Zutat z1 = new ZutatFactory().createZutat("Zitrone", 2);
         zutatReporsitory.save(z1);
 
-        Manager m2=new ManagerFactory().createManager("Kamal","Hida", new SpeisekarteFactory().createSpeisekarte("Restaurant", r1, m2));
+
+        Manager m2 = new ManagerFactory().createManager("Kamal","Hida");
         managerRepository.save(m2);
+        Speisekarte s2 = new SpeisekarteFactory().createSpeisekarte("Restaurant", m2);
+        sRep.save(s2);
+
         //      find method to list all workers called Kamal
-        List<Koch>kochList=miRep.findByMitarbeitername("Kamal");
+        /*List<Koch>kochList=miRep.findByMitarbeitername("Kamal");
         for(Koch koch:kochList) {
             System.out.println(koch.getMitarbeitername());
-        }
+        }*/
 
 
     }

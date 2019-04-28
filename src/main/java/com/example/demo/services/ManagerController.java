@@ -60,10 +60,10 @@ public class ManagerController {
      */
     @RequestMapping(value = "/manager", method = RequestMethod.POST)
     public ResponseEntity <?> persistPerson(
-            @RequestParam("mitarbeiterName") String mitarbeiterName, @RequestParam("mitarbeiterVornamen") String mitarbeiterVornamen,@RequestParam("speisekarte")Speisekarte speisekarte1)
+            @RequestParam("mitarbeiterName") String mitarbeiterName, @RequestParam("mitarbeiterVornamen") String mitarbeiterVornamen)
 
     {
-        Manager k = managerRepository.save(new ManagerFactory().createManager(mitarbeiterName, mitarbeiterVornamen,speisekarte1));
+        Manager k = managerRepository.save(new ManagerFactory().createManager(mitarbeiterName, mitarbeiterVornamen));
         URI location = ServletUriComponentsBuilder.fromCurrentRequestUri()
                 .path("/{id}").buildAndExpand( k.getId() ).toUri();
         return ResponseEntity.created( location ).body( k );
