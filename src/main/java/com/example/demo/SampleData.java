@@ -15,15 +15,16 @@ import java.util.Set;
 @Component
 public class SampleData implements ApplicationListener<ContextRefreshedEvent> {
     @Autowired
-    private RezeptReporsitory spRep;
+    private RezeptReporsitory rezeptReporsitory;
 
     @Autowired
-    private KochReporsitory miRep;
+    private KochReporsitory kochReporsitory;
 
     @Autowired
-    private SpeisekarteReporsitory sRep;
+    private SpeisekarteReporsitory speisekartenReporsitory;
+
     @Autowired
-    private ManagerRepository managerRepository;
+    private ManagerRepository managerReporsitory;
 
     @Autowired
     private ZutatReporsitory zutatReporsitory;
@@ -53,9 +54,9 @@ public class SampleData implements ApplicationListener<ContextRefreshedEvent> {
         spRep.save(new RezeptFactory().createRezept("Fleisch", "Schneiden Sie das Fleisch", k2, koch1, s2, zutaten1));
 
         System.out.println(spRep.findByRezeptName("Spaghetti").toString());
+
     }
 
     public SampleData() {
-
     }
 }

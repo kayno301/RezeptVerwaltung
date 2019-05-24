@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
+//@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class Mitarbeiter {
     @Id
     @GeneratedValue

@@ -13,7 +13,6 @@ public class Koch extends Mitarbeiter {
 
     protected Koch() {
     }
-
     public Koch(String mitarbeitername, String mitarbeitervornamen) {
         super(mitarbeitername, mitarbeitervornamen);
     }

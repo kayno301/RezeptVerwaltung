@@ -34,7 +34,7 @@ public class Rezept {
 
     protected Rezept() {
     }
-
+  
     public Rezept(Speisekarte speisekarte, String rezeptNamen, String rezeptBeschreibung, Kategorie kategorie, Set<Zutat> zutaten) {
         this.speisekarte = speisekarte;
         this.rezeptName = rezeptNamen;
@@ -87,6 +87,14 @@ public class Rezept {
         this.rezeptName = rezeptName;
     }
 
+    public String getRezeptName() {
+        return rezeptName;
+    }
+
+    public void setRezeptName(String rezeptName) {
+        this.rezeptName = rezeptName;
+    }
+
     public String getRezeptBeschreibung() {
         return rezeptBeschreibung;
     }
@@ -94,11 +102,11 @@ public class Rezept {
     public void setRezeptBeschreibung(String rezeptBeschreibung) {
         this.rezeptBeschreibung = rezeptBeschreibung;
     }
-
+  
     public Set<Zutat> getZutaten() {
         return zutaten;
     }
-
+  
     public void setZutaten(Set<Zutat> zutaten) {
         this.zutaten = zutaten;
     }
@@ -110,7 +118,6 @@ public class Rezept {
     public void setKategorie(Kategorie kategorie) {
         this.kategorie = kategorie;
     }
-
     public Rezept(String rezeptNamen,
                   String rezeptBeschreibung) {
         this.rezeptName = rezeptNamen;

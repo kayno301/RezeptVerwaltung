@@ -21,7 +21,6 @@ public class RezeptFactory {
         r1.setSpeisekarte(speisekarte);
         r1.setKategorie(kategorieName);
         r1.setKoch(koch1);
-
         return r1;
     }
 }
