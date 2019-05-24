@@ -13,6 +13,7 @@ public class Zutat {
     private String zutatName;
     private int zutatMenge;
 
+    //Todo: JoinTabel für Meilenstein 3 (Kann ohne fehler verursachen)
     @ManyToMany(mappedBy = "zutaten", cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
     private Set<Rezept> rezepte = new HashSet<>();
 
