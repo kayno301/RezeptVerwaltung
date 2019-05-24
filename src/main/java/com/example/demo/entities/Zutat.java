@@ -1,7 +1,5 @@
 package com.example.demo.entities;
 
-
-
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.HashSet;
@@ -15,7 +13,8 @@ public class Zutat {
     private String zutatName;
     private int zutatMenge;
 
-    @ManyToMany(mappedBy = "zutaten" ,cascade= CascadeType.ALL,fetch= FetchType.EAGER)
+    //Todo: JoinTabel für Meilenstein 3 (Kann ohne fehler verursachen)
+    @ManyToMany(mappedBy = "zutaten", cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
     private Set<Rezept> rezepte = new HashSet<>();
 
     public Zutat() {

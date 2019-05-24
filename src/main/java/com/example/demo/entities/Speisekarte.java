@@ -30,9 +30,6 @@ public class Speisekarte {
 
     public String toString() {
         String retVal = "Speisekarte Namen: " + speisekarteNamen;
-        // for (Rezept rezept : rezepte) {
-        //     retVal += rezept.toString();
-        // }
         return retVal;
     }
 
@@ -78,10 +75,8 @@ public class Speisekarte {
     }
 
     public void setManager(Manager manager) {
-
         if (this.manager != null)
             this.setManager(null);
-
         this.manager = manager;
     }
 }

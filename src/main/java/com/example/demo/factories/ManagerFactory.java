@@ -8,6 +8,9 @@ public class ManagerFactory {
     public ManagerFactory() {
     }
 
+    public ManagerFactory() {
+    }
+  
     public Manager createManager(String mitarbeiternamen, String mitarbeitervornamen) {
         Manager m1 = new Manager(mitarbeiternamen, mitarbeitervornamen);
         m1.setMitarbeitername(mitarbeiternamen);

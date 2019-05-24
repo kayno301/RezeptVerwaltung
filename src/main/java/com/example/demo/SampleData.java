@@ -9,6 +9,9 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Component
 public class SampleData implements ApplicationListener<ContextRefreshedEvent> {
     @Autowired
@@ -28,36 +31,30 @@ public class SampleData implements ApplicationListener<ContextRefreshedEvent> {
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent arg0) {
-        Kategorie kategorieVegan = new Kategorie("Vegan");
-        Kategorie kategorieFastFood = new Kategorie("FastFood");
-
+        Kategorie k1 = new Kategorie("Vegan");
+        Kategorie k2 = new Kategorie("Hausmannskost");
         Koch koch1 = new KochFactory().createKoch("Max", "Mustermann");
-        Koch koch2 = new KochFactory().createKoch("Mario", "Italia");
-        kochReporsitory.save(koch1);
-        kochReporsitory.save(koch2);
+        miRep.save(koch1);
+        Koch koch2 = new KochFactory().createKoch("Maximilian", "Herrmann");
+        miRep.save(koch2);
 
-        Zutat zutatSpaghetti = new ZutatFactory().createZutat("Spaghetti", 2);
-        Zutat zutatKaese = new ZutatFactory().createZutat("Käse", 1000);
-        Zutat zutatPizzateig = new ZutatFactory().createZutat("Pizzateig", 2500); 
-        zutatReporsitory.save(zutatSpaghetti);
-        zutatReporsitory.save(zutatKaese);
-        zutatReporsitory.save(zutatPizzateig);
+        Manager m2 = new ManagerFactory().createManager("Kamal", "Hida");
+        managerRepository.save(m2);
+        Speisekarte s2 = new SpeisekarteFactory().createSpeisekarte("Restaurant", m2);
 
-        Manager manager = new ManagerFactory().createManager("Hida", "Kamal");
-        managerReporsitory.save(manager);
 
-        Speisekarte speisekarte = new SpeisekarteFactory().createSpeisekarte("Restaurant", manager);
-        speisekartenReporsitory.save(speisekarte);
+        Zutat z1 = new ZutatFactory().createZutat("Zitrone", 2);
+        Set<Zutat> zutaten1 = new HashSet<Zutat>();
+        zutaten1.add(z1);
+        zutatReporsitory.save(zutaten1);
+        sRep.save(s2);
+        Rezept r1 = new RezeptFactory().createRezept("Spaghetti", "Jaja", k1, koch2, s2, zutaten1);
+        spRep.save(r1);
+        spRep.save(new RezeptFactory().createRezept("Nudeln", "Kochen Sie die Nudeln", k1, koch1, s2, zutaten1));
+        spRep.save(new RezeptFactory().createRezept("Fleisch", "Schneiden Sie das Fleisch", k2, koch1, s2, zutaten1));
 
-        Rezept rezeptSpaghetti = new RezeptFactory().createRezept("Spaghetti", "Jaja", kategorieVegan, koch1, speisekarte);
-        Rezept rezeptPizza = new RezeptFactory().createRezept("Pizza", "Magaritha", kategorieFastFood, koch2, speisekarte);
-        // String rezeptNamen, String rezeptBeschreibung,  Kategorie kategorieName, Koch koch1, Speisekarte speisekarte
-        rezeptReporsitory.save(rezeptSpaghetti);
-        rezeptReporsitory.save(rezeptPizza);        
-        
-        System.out.println(rezeptReporsitory.findByRezeptName("Spaghetti"));
-        System.out.println(rezeptReporsitory.findByRezeptName("Pizza"));
-        System.out.println(speisekartenReporsitory.findByManager(managerReporsitory.findByMitarbeitername("Hida").get(0)));
+        System.out.println(spRep.findByRezeptName("Spaghetti").toString());
+
     }
 
     public SampleData() {

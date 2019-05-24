@@ -6,12 +6,12 @@ import javax.persistence.OneToOne;
 
 @Entity
 public class Manager extends Mitarbeiter {
-    protected Manager() {
-    }
-
     @OneToOne(mappedBy = "manager", cascade = CascadeType.ALL)
     private Speisekarte speisekarte;
 
+    protected Manager() {
+    }
+  
     public Manager(String mitarbeitername, String mitarbeitervornamen) {
         super(mitarbeitername, mitarbeitervornamen);
     }

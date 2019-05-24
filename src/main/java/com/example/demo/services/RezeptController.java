@@ -3,6 +3,7 @@ package com.example.demo.services;
 import com.example.demo.entities.Koch;
 import com.example.demo.entities.Rezept;
 import com.example.demo.entities.Speisekarte;
+import com.example.demo.entities.Zutat;
 import com.example.demo.factories.RezeptFactory;
 import com.example.demo.reporsitories.RezeptReporsitory;
 import com.example.demo.valueObjects.Kategorie;
@@ -13,6 +14,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 public class RezeptController {
@@ -62,9 +64,9 @@ public class RezeptController {
     @RequestMapping(value = "/rezept", method = RequestMethod.POST)
     public ResponseEntity<?> persistPerson(
             @RequestParam("rezeptNamen") String rezeptNamen,
-            @RequestParam("rezeptBeschreibung") String rezeptBeschreibung, @RequestParam("kategorieName") Kategorie kategorieName,
-            @RequestParam("koch") Koch koch1, @RequestParam("speisekarte") Speisekarte speisekarte) {
-        Rezept k = rezeptReporsitory.save(new RezeptFactory().createRezept(rezeptNamen, rezeptBeschreibung, kategorieName, koch1, speisekarte));
+            @RequestParam("rezeptBeschreibung") String rezeptBeschreibung, @RequestParam("kategorieName") Kategorie kategorieName, @RequestParam("koch") Koch koch1, @RequestParam("speisekarte") Speisekarte speisekarte,
+            @RequestParam("zutaten") Set<Zutat> zutaten) {
+        Rezept k = rezeptReporsitory.save(new RezeptFactory().createRezept(rezeptNamen, rezeptBeschreibung, kategorieName, koch1, speisekarte, zutaten));
         URI location = ServletUriComponentsBuilder.fromCurrentRequestUri()
                 .path("/{id}").buildAndExpand(k.getId()).toUri();
         return ResponseEntity.created(location).body(k);
