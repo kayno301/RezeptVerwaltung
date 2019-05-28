@@ -13,8 +13,10 @@ import java.util.List;
 
 @RestController
 public class ManagerController {
+
     @Autowired
     private ManagerRepository managerRepository;
+
 
     @RequestMapping(path = "/manager", method = RequestMethod.GET)
     public List<Manager> getAllManager() {
@@ -46,6 +48,7 @@ public class ManagerController {
         } else return ResponseEntity.notFound().build();
     }
 
+
     /**
      * Einen Kunden neu anlegen
      *
@@ -59,4 +62,9 @@ public class ManagerController {
                 .path("/{id}").buildAndExpand(k.getId()).toUri();
         return ResponseEntity.created(location).body(k);
     }
+
 }
+
+
+
+

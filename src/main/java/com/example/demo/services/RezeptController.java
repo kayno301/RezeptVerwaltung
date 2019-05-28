@@ -18,6 +18,7 @@ import java.util.Set;
 
 @RestController
 public class RezeptController {
+
     @Autowired
     private RezeptReporsitory rezeptReporsitory;
 
@@ -56,6 +57,7 @@ public class RezeptController {
         } else return ResponseEntity.notFound().build();
     }
 
+
     /**
      * Einen Kunden neu anlegen
      *
@@ -71,4 +73,9 @@ public class RezeptController {
                 .path("/{id}").buildAndExpand(k.getId()).toUri();
         return ResponseEntity.created(location).body(k);
     }
+
 }
+
+
+
+

@@ -14,6 +14,7 @@ import java.util.List;
 
 @RestController
 public class SpeisekarteController {
+
     @Autowired
     private SpeisekarteReporsitory speisekarteRepository;
 
@@ -52,6 +53,7 @@ public class SpeisekarteController {
         } else return ResponseEntity.notFound().build();
     }
 
+
     /**
      * Einen Kunden neu anlegen
      *
@@ -65,4 +67,7 @@ public class SpeisekarteController {
                 .path("/{id}").buildAndExpand(k.getId()).toUri();
         return ResponseEntity.created(location).body(k);
     }
+
 }
+
+

@@ -5,7 +5,6 @@ import com.example.demo.entities.Rezept;
 import com.example.demo.entities.Speisekarte;
 import com.example.demo.entities.Zutat;
 import com.example.demo.valueObjects.Kategorie;
-
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;

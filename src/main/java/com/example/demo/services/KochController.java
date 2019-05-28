@@ -13,6 +13,7 @@ import java.util.List;
 
 @RestController
 public class KochController {
+
     @Autowired
     private KochReporsitory kochReporsitory;
 
@@ -51,6 +52,7 @@ public class KochController {
         } else return ResponseEntity.notFound().build();
     }
 
+
     /**
      * Einen Kunden neu anlegen
      *
@@ -64,4 +66,9 @@ public class KochController {
                 .path("/{id}").buildAndExpand(k.getId()).toUri();
         return ResponseEntity.created(location).body(k);
     }
+
 }
+
+
+
+
