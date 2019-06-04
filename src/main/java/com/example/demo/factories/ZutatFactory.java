@@ -2,7 +2,9 @@ package com.example.demo.factories;
 
 import com.example.demo.entities.Rezept;
 import com.example.demo.entities.Zutat;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ZutatFactory {
 
     public ZutatFactory (){}
