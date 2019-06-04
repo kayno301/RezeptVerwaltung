@@ -15,9 +15,7 @@ public class RezeptFactory {
     public RezeptFactory() {
     }
 
-    public Rezept createRezept(String rezeptNamen, String rezeptBeschreibung, Kategorie kategorieName,
-                               Koch koch1,
-                               Speisekarte speisekarte, Set<Zutat> zutaten) {
+    public Rezept createRezept(String rezeptNamen, String rezeptBeschreibung, Kategorie kategorieName, Koch koch1, Speisekarte speisekarte, Set<Zutat> zutaten) {
         Rezept r1 = new Rezept(rezeptNamen, rezeptBeschreibung);
         r1.setZutaten(zutaten);
         r1.setSpeisekarte(speisekarte);

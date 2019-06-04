@@ -1,12 +1,9 @@
 package com.example.demo.valueObjects;
 
-
-import javax.persistence.*;
+import javax.persistence.Embeddable;
 
 @Embeddable
-public class Kategorie{
-
-
+public class Kategorie {
     private String kategorieName;
 
     protected Kategorie() {
@@ -16,7 +13,7 @@ public class Kategorie{
         this.kategorieName = kategorieName;
     }
 
-    public String toString(){
+    public String toString() {
         return this.kategorieName;
     }
 }

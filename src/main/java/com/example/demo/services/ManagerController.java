@@ -1,14 +1,8 @@
 package com.example.demo.services;
 
 import com.example.demo.entities.Manager;
-import com.example.demo.entities.Rezept;
-import com.example.demo.entities.Speisekarte;
 import com.example.demo.factories.ManagerFactory;
-import com.example.demo.factories.RezeptFactory;
-import com.example.demo.factories.SpeisekarteFactory;
 import com.example.demo.reporsitories.ManagerRepository;
-import com.example.demo.reporsitories.RezeptReporsitory;
-import com.example.demo.reporsitories.SpeisekarteReporsitory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -31,42 +25,42 @@ public class ManagerController {
 
     /**
      * Einen bestimmten Manager auslesen
+     *
      * @return
      */
-    @RequestMapping(path="/manager/{id}", method = RequestMethod.GET)
-    public ResponseEntity<?> getMangerById(@PathVariable("id") Long id ) {
+    @RequestMapping(path = "/manager/{id}", method = RequestMethod.GET)
+    public ResponseEntity<?> getMangerById(@PathVariable("id") Long id) {
         Manager m1 = managerRepository.findOne(id);
-        if ( m1 == null ) return ResponseEntity.notFound().build();
-        else return ResponseEntity.ok().body( m1 );
+        if (m1 == null) return ResponseEntity.notFound().build();
+        else return ResponseEntity.ok().body(m1);
     }
 
     /**
      * Einen Kunden löschen
+     *
      * @return
      */
-    @RequestMapping(path="/manager/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(path = "/manager/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<?> deleteRezept(@PathVariable("id") Long id) {
-        if ( managerRepository.exists(id) ) {
+        if (managerRepository.exists(id)) {
             managerRepository.delete(id);
             return ResponseEntity.ok().build();
-        }
-        else return ResponseEntity.notFound().build();
+        } else return ResponseEntity.notFound().build();
     }
 
 
     /**
      * Einen Kunden neu anlegen
+     *
      * @return
      */
     @RequestMapping(value = "/manager", method = RequestMethod.POST)
-    public ResponseEntity <?> persistPerson(
-            @RequestParam("mitarbeiterName") String mitarbeiterName, @RequestParam("mitarbeiterVornamen") String mitarbeiterVornamen)
-
-    {
+    public ResponseEntity<?> persistPerson(
+            @RequestParam("mitarbeiterName") String mitarbeiterName, @RequestParam("mitarbeiterVornamen") String mitarbeiterVornamen) {
         Manager k = managerRepository.save(new ManagerFactory().createManager(mitarbeiterName, mitarbeiterVornamen));
         URI location = ServletUriComponentsBuilder.fromCurrentRequestUri()
-                .path("/{id}").buildAndExpand( k.getId() ).toUri();
-        return ResponseEntity.created( location ).body( k );
+                .path("/{id}").buildAndExpand(k.getId()).toUri();
+        return ResponseEntity.created(location).body(k);
     }
 
 }

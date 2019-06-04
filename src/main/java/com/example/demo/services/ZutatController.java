@@ -1,6 +1,6 @@
 package com.example.demo.services;
 
-import com.example.demo.entities.Rezept;
+import com.example.demo.entities.Koch;
 import com.example.demo.entities.Zutat;
 import com.example.demo.factories.ZutatFactory;
 import com.example.demo.reporsitories.ZutatReporsitory;
@@ -13,6 +13,7 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
+@RequestMapping("/Zutat")
 public class ZutatController {
 
     @Autowired
@@ -20,6 +21,7 @@ public class ZutatController {
 
     /**
      * Alle Kunden auslesen
+     *
      * @return
      */
     @RequestMapping(path = "/zutat", method = RequestMethod.GET)
@@ -29,43 +31,49 @@ public class ZutatController {
 
     /**
      * Einen bestimmten Kunden auslesen
+     *
      * @return
      */
-    @RequestMapping(path="/zutat/{id}", method = RequestMethod.GET)
-    public ResponseEntity<?> getSpeisekarteById(@PathVariable("id") Long id ) {
+    @RequestMapping(path = "/zutat/{id}", method = RequestMethod.GET)
+    public ResponseEntity<?> getSpeisekarteById(@PathVariable("id") Long id) {
         Zutat z1 = zutatRep.findOne(id);
-        if ( z1 == null ) return ResponseEntity.notFound().build();
-        else return ResponseEntity.ok().body( z1 );
+        if (z1 == null) return ResponseEntity.notFound().build();
+        else return ResponseEntity.ok().body(z1);
     }
 
     /**
      * Einen Kunden löschen
+     *
      * @return
      */
-    @RequestMapping(path="/zutat/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(path = "/zutat/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<?> deleteSpeisekarte(@PathVariable("id") Long id) {
-        if ( zutatRep.exists(id) ) {
+        if (zutatRep.exists(id)) {
             zutatRep.delete(id);
             return ResponseEntity.ok().build();
-        }
-        else return ResponseEntity.notFound().build();
+        } else return ResponseEntity.notFound().build();
     }
 
 
     /**
      * Einen Kunden neu anlegen
+     *
      * @return
      */
     @RequestMapping(value = "/zutat", method = RequestMethod.POST)
-    public ResponseEntity <?> persistPerson(
-            @RequestParam("zutatNamen") String zutatNamen, @RequestParam("zutatMenge") int zutatMenge, @RequestParam("rezept") Rezept rezept)
-    {
-        Zutat k = zutatRep.save(new ZutatFactory().createZutat(zutatNamen, zutatMenge, rezept));
+    public ResponseEntity<?> persistPerson(
+            @RequestParam("zutatNamen") String zutatNamen, @RequestParam("zutatMenge") int zutatMenge) {
+        Zutat k = zutatRep.save(new ZutatFactory().createZutat(zutatNamen, zutatMenge));
         URI location = ServletUriComponentsBuilder.fromCurrentRequestUri()
-                .path("/{id}").buildAndExpand( k.getId() ).toUri();
-        return ResponseEntity.created( location ).body( k );
+                .path("/{id}").buildAndExpand(k.getId()).toUri();
+        return ResponseEntity.created(location).body(k);
     }
 
+
+    @GetMapping
+    public List<Zutat> getAllZutaten() {
+        return (List<Zutat>) zutatRep.findAll();
+    }
 }
 
 
