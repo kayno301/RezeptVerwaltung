@@ -74,6 +74,10 @@ public class KochController {
         return (List<Koch>) kochReporsitory.findAll();
     }
 
+    @GetMapping("/{id}")
+    public Koch getKochId(@PathVariable("id") Long id){
+        return kochReporsitory.findOne(id);
+    }
 }
 
 
