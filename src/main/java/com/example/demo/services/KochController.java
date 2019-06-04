@@ -3,11 +3,13 @@ package com.example.demo.services;
 import com.example.demo.entities.Koch;
 import com.example.demo.factories.KochFactory;
 import com.example.demo.reporsitories.KochReporsitory;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -77,6 +79,23 @@ public class KochController {
     @GetMapping("/{id}")
     public Koch getKochId(@PathVariable("id") Long id){
         return kochReporsitory.findOne(id);
+    }
+
+
+    //Scenario A.1
+    @PostMapping
+    public ResponseEntity<?> add(@Valid @RequestBody String body){
+        String mitarbeitername;
+        String mitarbeitervorname;
+
+        JSONObject obj = new JSONObject(body);
+
+        mitarbeitername = obj.getString("mitarbeitername");
+        mitarbeitervorname = obj.getString("mitarbeitervorname");
+
+        Koch k = kochReporsitory.save(new Koch(mitarbeitername, mitarbeitervorname));
+        URI location = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}").buildAndExpand(k.getId()).toUri();
+        return ResponseEntity.created(location).body(k);
     }
 }
 
