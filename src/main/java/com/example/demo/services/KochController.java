@@ -12,6 +12,7 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
+@RequestMapping("/Koch")
 public class KochController {
 
     @Autowired
@@ -65,6 +66,12 @@ public class KochController {
         URI location = ServletUriComponentsBuilder.fromCurrentRequestUri()
                 .path("/{id}").buildAndExpand(k.getId()).toUri();
         return ResponseEntity.created(location).body(k);
+    }
+
+
+    @GetMapping
+    public List<Koch> getAllKoeche() {
+        return (List<Koch>) kochReporsitory.findAll();
     }
 
 }

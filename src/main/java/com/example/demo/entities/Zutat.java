@@ -1,5 +1,7 @@
 package com.example.demo.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.HashSet;
@@ -15,6 +17,7 @@ public class Zutat {
 
     //Todo: JoinTabel für Meilenstein 3 (Kann ohne fehler verursachen)
     @ManyToMany(mappedBy = "zutaten", cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
+    @JsonBackReference
     private Set<Rezept> rezepte = new HashSet<>();
 
     public Zutat() {

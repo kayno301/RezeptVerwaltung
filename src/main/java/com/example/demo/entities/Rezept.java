@@ -1,6 +1,8 @@
 package com.example.demo.entities;
 
 import com.example.demo.valueObjects.Kategorie;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -13,12 +15,15 @@ public class Rezept {
     private Long id;
 
     @ManyToOne
+    @JsonBackReference
     private Speisekarte speisekarte;
 
     @ManyToOne
+    @JsonBackReference
     private Koch koch;
 
     @ManyToMany(fetch = FetchType.LAZY)
+    @JsonManagedReference
     private Set<Zutat> zutaten = new HashSet<>();
 
     private String rezeptName;

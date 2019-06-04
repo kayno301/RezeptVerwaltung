@@ -1,5 +1,6 @@
 package com.example.demo.services;
 
+import com.example.demo.entities.Koch;
 import com.example.demo.entities.Zutat;
 import com.example.demo.factories.ZutatFactory;
 import com.example.demo.reporsitories.ZutatReporsitory;
@@ -12,6 +13,7 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
+@RequestMapping("/Zutat")
 public class ZutatController {
 
     @Autowired
@@ -67,6 +69,11 @@ public class ZutatController {
         return ResponseEntity.created(location).body(k);
     }
 
+
+    @GetMapping
+    public List<Zutat> getAllZutaten() {
+        return (List<Zutat>) zutatRep.findAll();
+    }
 }
 
 

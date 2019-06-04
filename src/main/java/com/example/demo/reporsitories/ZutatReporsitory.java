@@ -12,4 +12,5 @@ public interface ZutatReporsitory extends CrudRepository<Zutat, Long> {
     List<Zutat> findByZutatName(String zutatName);
     List<Zutat> findByZutatMenge(int zutatMenge);
     List<Zutat> findByRezepte(Set<Rezept> rezepte);
+    List<Zutat> findAll();
 }

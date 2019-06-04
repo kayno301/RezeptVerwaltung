@@ -12,4 +12,5 @@ public interface KochReporsitory extends CrudRepository<Koch, Long> {
     List<Koch> findByMitarbeitervornamen(String mitarbeitervornamen);
     List<Koch> findById(long id);
     List<Koch> findByRezepte(Set<Rezept> rezepte);
+    List<Koch> findAll();
 }
