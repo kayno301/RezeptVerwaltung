@@ -97,6 +97,31 @@ public class KochController {
         URI location = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}").buildAndExpand(k.getId()).toUri();
         return ResponseEntity.created(location).body(k);
     }
+
+    //A.3, aber warscheinlich nicht ganz richtig
+    @PatchMapping("/{id}")
+    public ResponseEntity<?> change(@PathVariable("id") Long id, @Valid @RequestBody String body){
+        Koch k = kochReporsitory.findOne(id);
+        if(k == null) return ResponseEntity.notFound().build();
+        else {
+            JSONObject obj = new JSONObject(body);
+            if(obj.has("mitarbeitername")){
+                k.setMitarbeitername(obj.getString("mitarbeitername"));
+            }
+            if(obj.has("mitarbeitervorname")){
+                k.setMitarbeitervornamen(obj.getString("mitarbeitervorname"));
+            }
+            if(obj.has("gehalt")){
+                if(k.getGehalt() < obj.getInt("gehalt")) {
+                    k.setGehalt(obj.getInt("gehalt"));
+                } else {
+                    return ResponseEntity.badRequest().build();
+                }
+            }
+            kochReporsitory.save(k);
+            return ResponseEntity.ok().body(k);
+        }
+    }
 }
 
 

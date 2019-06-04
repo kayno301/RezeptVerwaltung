@@ -13,12 +13,15 @@ public abstract class Mitarbeiter {
     private String mitarbeitername;
     private String mitarbeitervornamen;
 
+    private int gehalt;
+
     protected Mitarbeiter() {
     }
 
     public Mitarbeiter(String mitarbeitername, String mitarbeitervornamen) {
         this.mitarbeitername = mitarbeitername;
         this.mitarbeitervornamen = mitarbeitervornamen;
+        this.gehalt = 1000;
     }
 
     public Long getId() {
@@ -27,6 +30,14 @@ public abstract class Mitarbeiter {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public void setGehalt(int gehalt) {
+        this.gehalt = gehalt;
+    }
+
+    public int getGehalt() {
+        return gehalt;
     }
 
     public String getMitarbeitername() {
