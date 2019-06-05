@@ -3,11 +3,13 @@ package com.example.demo.services;
 import com.example.demo.entities.Koch;
 import com.example.demo.factories.KochFactory;
 import com.example.demo.reporsitories.KochReporsitory;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -74,6 +76,52 @@ public class KochController {
         return (List<Koch>) kochReporsitory.findAll();
     }
 
+    @GetMapping("/{id}")
+    public Koch getKochId(@PathVariable("id") Long id){
+        return kochReporsitory.findOne(id);
+    }
+
+
+    //Scenario A.1
+    @PostMapping
+    public ResponseEntity<?> add(@Valid @RequestBody String body){
+        String mitarbeitername;
+        String mitarbeitervorname;
+
+        JSONObject obj = new JSONObject(body);
+
+        mitarbeitername = obj.getString("mitarbeitername");
+        mitarbeitervorname = obj.getString("mitarbeitervorname");
+
+        Koch k = kochReporsitory.save(new Koch(mitarbeitername, mitarbeitervorname));
+        URI location = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}").buildAndExpand(k.getId()).toUri();
+        return ResponseEntity.created(location).body(k);
+    }
+
+    //A.3, aber warscheinlich nicht ganz richtig
+    @PatchMapping("/{id}")
+    public ResponseEntity<?> change(@PathVariable("id") Long id, @Valid @RequestBody String body){
+        Koch k = kochReporsitory.findOne(id);
+        if(k == null) return ResponseEntity.notFound().build();
+        else {
+            JSONObject obj = new JSONObject(body);
+            if(obj.has("mitarbeitername")){
+                k.setMitarbeitername(obj.getString("mitarbeitername"));
+            }
+            if(obj.has("mitarbeitervorname")){
+                k.setMitarbeitervornamen(obj.getString("mitarbeitervorname"));
+            }
+            if(obj.has("gehalt")){
+                if(k.getGehalt() < obj.getInt("gehalt")) {
+                    k.setGehalt(obj.getInt("gehalt"));
+                } else {
+                    return ResponseEntity.badRequest().build();
+                }
+            }
+            kochReporsitory.save(k);
+            return ResponseEntity.ok().body(k);
+        }
+    }
 }
 
 
