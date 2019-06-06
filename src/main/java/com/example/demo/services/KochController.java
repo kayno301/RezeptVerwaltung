@@ -111,8 +111,8 @@ public class KochController {
     
     }
 
-    @GetMapping("/vergleich")
-    public ResponseEntity<?> vergleich(@RequestBody String body){
+    @GetMapping("/vergleich/noResponse")
+    public ResponseEntity<?> vergleichNoResponse(@RequestBody String body){
         ArrayList<Koch> koeche = (ArrayList)kochReporsitory.findAll();
         ArrayList<Koch> filtered = new ArrayList<>();
         if(koeche.isEmpty()) return ResponseEntity.notFound().build();
@@ -132,8 +132,33 @@ public class KochController {
                 break;
             //theoretisch können hier weitere Attribute hin, aber string zu vergleichen macht kein sinn.
         }
+        System.out.println("noResponse");
+        return ResponseEntity.ok().build();
+    }
 
-        return ResponseEntity.ok().body(filtered); 
+    @GetMapping("/vergleich")
+    public ResponseEntity<?> vergleich(@RequestBody String body){
+        ArrayList<Koch> koeche = (ArrayList)kochReporsitory.findAll();
+        ArrayList<Koch> filtered = new ArrayList<>();
+        if(koeche.isEmpty()) return ResponseEntity.notFound().build();
+
+        JSONObject obj = new JSONObject(body);
+
+        String attr = obj.getString("vergleichsattribut");
+        String value = obj.getString("vergleichswert");
+
+        switch(attr){
+            case "gehalt":
+                for (Koch k : koeche) {
+                    if(k.getGehalt() > Integer.parseInt(value)){
+                        filtered.add(k);
+                    }
+                }
+                break;
+            //theoretisch können hier weitere Attribute hin, aber string zu vergleichen macht kein sinn.
+        }
+
+        return ResponseEntity.ok().body(filtered);
     }
 
     // //A.3, aber warscheinlich nicht ganz richtig
