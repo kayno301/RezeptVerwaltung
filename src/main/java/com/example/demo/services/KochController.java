@@ -103,14 +103,6 @@ public class KochController {
         return ResponseEntity.created(location).body(k);
     }
 
-    //Scenario A2
-    @GetMapping("/?gt={value01}")
-    public Long get(@PathVariable("id") Long gt){
-        System.out.println("called");
-        return gt;
-    
-    }
-
     @GetMapping("/vergleich/noResponse")
     public ResponseEntity<?> vergleichNoResponse(@RequestBody String body){
         ArrayList<Koch> koeche = (ArrayList)kochReporsitory.findAll();
@@ -161,6 +153,29 @@ public class KochController {
         return ResponseEntity.ok().body(filtered);
     }
 
+    //A.3
+    @PutMapping("/{id}")
+    public ResponseEntity<?> change(@PathVariable("id") Long id, @Valid @RequestBody String body){
+        Koch koch = kochReporsitory.findOne(id);
+        String mitarbeitername;
+        String mitarbeitervorname;
+        int gehalt;
+
+        JSONObject obj = new JSONObject(body);
+
+        mitarbeitername = obj.getString("mitarbeitername");
+        mitarbeitervorname = obj.getString("mitarbeitervorname");
+        gehalt = obj.getInt("gehalt");
+
+        koch.setMitarbeitername(mitarbeitername);
+        koch.setMitarbeitervornamen(mitarbeitervorname);
+        koch.setGehalt(gehalt);
+
+        kochReporsitory.save(koch);
+        URI location = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}").buildAndExpand(koch.getId()).toUri();
+        return ResponseEntity.created(location).body(koch);
+    }
+
     // //A.3, aber warscheinlich nicht ganz richtig
     // @PatchMapping("/{id}")
     // public ResponseEntity<?> change(@PathVariable("id") Long id, @Valid @RequestBody String body){
@@ -188,10 +203,11 @@ public class KochController {
 
     //A.5
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable("id") Long id){
+    public ResponseEntity<?> deletefgdj(@PathVariable("id") Long id){
         Koch k = kochReporsitory.findOne(id);
+
         if(k == null) return ResponseEntity.notFound().build();
-        
+
         kochReporsitory.delete(k);
 
         return ResponseEntity.ok().body(k);
