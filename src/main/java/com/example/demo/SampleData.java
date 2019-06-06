@@ -32,9 +32,9 @@ public class SampleData implements ApplicationListener<ContextRefreshedEvent> {
     public void onApplicationEvent(ContextRefreshedEvent arg0) {
         Kategorie k1 = new Kategorie("Vegan");
         Kategorie k2 = new Kategorie("Hausmannskost");
-        Koch koch1 = new KochFactory().createKoch("Max", "Mustermann");
+        Koch koch1 = new KochFactory().createKoch("Max", "Mustermann", 1000);
         miRep.save(koch1);
-        Koch koch2 = new KochFactory().createKoch("Maximilian", "Herrmann");
+        Koch koch2 = new KochFactory().createKoch("Maximilian", "Herrmann", 1500);
         miRep.save(koch2);
 
         Manager m2 = new ManagerFactory().createManager("Kamal", "Hida");

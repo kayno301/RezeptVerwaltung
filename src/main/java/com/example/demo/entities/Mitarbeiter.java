@@ -24,6 +24,12 @@ public abstract class Mitarbeiter {
         this.gehalt = 1000;
     }
 
+    public Mitarbeiter(String mitarbeitername, String mitarbeitervornamen, int gehalt) {
+        this.mitarbeitername = mitarbeitername;
+        this.mitarbeitervornamen = mitarbeitervornamen;
+        this.gehalt = gehalt;
+    }
+
     public Long getId() {
         return id;
     }

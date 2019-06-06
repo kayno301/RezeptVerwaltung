@@ -10,7 +10,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
+import javax.websocket.server.PathParam;
+
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -73,6 +76,7 @@ public class KochController {
 
     @GetMapping
     public List<Koch> getAllKoeche() {
+        System.out.println("calledALL");
         return (List<Koch>) kochReporsitory.findAll();
     }
 
@@ -81,49 +85,115 @@ public class KochController {
         return kochReporsitory.findOne(id);
     }
 
-
     //Scenario A.1
     @PostMapping
     public ResponseEntity<?> add(@Valid @RequestBody String body){
         String mitarbeitername;
         String mitarbeitervorname;
+        int gehalt;
 
         JSONObject obj = new JSONObject(body);
 
         mitarbeitername = obj.getString("mitarbeitername");
         mitarbeitervorname = obj.getString("mitarbeitervorname");
+        gehalt = obj.getInt("gehalt");
 
-        Koch k = kochReporsitory.save(new Koch(mitarbeitername, mitarbeitervorname));
+        Koch k = kochReporsitory.save(new Koch(mitarbeitername, mitarbeitervorname, gehalt));
         URI location = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}").buildAndExpand(k.getId()).toUri();
         return ResponseEntity.created(location).body(k);
     }
 
-    //A.3, aber warscheinlich nicht ganz richtig
-    @PatchMapping("/{id}")
-    public ResponseEntity<?> change(@PathVariable("id") Long id, @Valid @RequestBody String body){
+    //Scenario A2
+    @GetMapping("/?gt={value01}")
+    public Long get(@PathVariable("id") Long gt){
+        System.out.println("called");
+        return gt;
+    
+    }
+
+    @GetMapping("/vergleich/noResponse")
+    public ResponseEntity<?> vergleichNoResponse(@RequestBody String body){
+        ArrayList<Koch> koeche = (ArrayList)kochReporsitory.findAll();
+        ArrayList<Koch> filtered = new ArrayList<>();
+        if(koeche.isEmpty()) return ResponseEntity.notFound().build();
+        
+        JSONObject obj = new JSONObject(body);
+        
+        String attr = obj.getString("vergleichsattribut");
+        String value = obj.getString("vergleichswert");
+
+        switch(attr){
+            case "gehalt":
+                for (Koch k : koeche) {
+                    if(k.getGehalt() > Integer.parseInt(value)){
+                        filtered.add(k);
+                    }
+                }
+                break;
+            //theoretisch können hier weitere Attribute hin, aber string zu vergleichen macht kein sinn.
+        }
+        System.out.println("noResponse");
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/vergleich")
+    public ResponseEntity<?> vergleich(@RequestBody String body){
+        ArrayList<Koch> koeche = (ArrayList)kochReporsitory.findAll();
+        ArrayList<Koch> filtered = new ArrayList<>();
+        if(koeche.isEmpty()) return ResponseEntity.notFound().build();
+
+        JSONObject obj = new JSONObject(body);
+
+        String attr = obj.getString("vergleichsattribut");
+        String value = obj.getString("vergleichswert");
+
+        switch(attr){
+            case "gehalt":
+                for (Koch k : koeche) {
+                    if(k.getGehalt() > Integer.parseInt(value)){
+                        filtered.add(k);
+                    }
+                }
+                break;
+            //theoretisch können hier weitere Attribute hin, aber string zu vergleichen macht kein sinn.
+        }
+
+        return ResponseEntity.ok().body(filtered);
+    }
+
+    // //A.3, aber warscheinlich nicht ganz richtig
+    // @PatchMapping("/{id}")
+    // public ResponseEntity<?> change(@PathVariable("id") Long id, @Valid @RequestBody String body){
+    //     Koch k = kochReporsitory.findOne(id);
+    //     if(k == null) return ResponseEntity.notFound().build();
+    //     else {
+    //         JSONObject obj = new JSONObject(body);
+    //         if(obj.has("mitarbeitername")){
+    //             k.setMitarbeitername(obj.getString("mitarbeitername"));
+    //         }
+    //         if(obj.has("mitarbeitervorname")){
+    //             k.setMitarbeitervornamen(obj.getString("mitarbeitervorname"));
+    //         }
+    //         if(obj.has("gehalt")){
+    //             if(k.getGehalt() < obj.getInt("gehalt")) {
+    //                 k.setGehalt(obj.getInt("gehalt"));
+    //             } else {
+    //                 return ResponseEntity.badRequest().build();
+    //             }
+    //         }
+    //         kochReporsitory.save(k);
+    //         return ResponseEntity.ok().body(k);
+    //     }
+    // }
+
+    //A.5
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> delete(@PathVariable("id") Long id){
         Koch k = kochReporsitory.findOne(id);
         if(k == null) return ResponseEntity.notFound().build();
-        else {
-            JSONObject obj = new JSONObject(body);
-            if(obj.has("mitarbeitername")){
-                k.setMitarbeitername(obj.getString("mitarbeitername"));
-            }
-            if(obj.has("mitarbeitervorname")){
-                k.setMitarbeitervornamen(obj.getString("mitarbeitervorname"));
-            }
-            if(obj.has("gehalt")){
-                if(k.getGehalt() < obj.getInt("gehalt")) {
-                    k.setGehalt(obj.getInt("gehalt"));
-                } else {
-                    return ResponseEntity.badRequest().build();
-                }
-            }
-            kochReporsitory.save(k);
-            return ResponseEntity.ok().body(k);
-        }
+        
+        kochReporsitory.delete(k);
+
+        return ResponseEntity.ok().body(k);
     }
 }
-
-
-
-

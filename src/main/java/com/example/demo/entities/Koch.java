@@ -21,6 +21,10 @@ public class Koch extends Mitarbeiter {
         super(mitarbeitername, mitarbeitervornamen);
     }
 
+    public Koch(String mitarbeitername, String mitarbeitervornamen, int gehalt){
+        super(mitarbeitername, mitarbeitervornamen, gehalt);
+    }
+
     public Set<Rezept> getRezepte() {
         return rezepte;
     }

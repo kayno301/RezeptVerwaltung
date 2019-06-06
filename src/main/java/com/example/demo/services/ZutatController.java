@@ -1,6 +1,5 @@
 package com.example.demo.services;
 
-import com.example.demo.entities.Koch;
 import com.example.demo.entities.Zutat;
 import com.example.demo.factories.ZutatFactory;
 import com.example.demo.reporsitories.ZutatReporsitory;
@@ -75,7 +74,3 @@ public class ZutatController {
         return (List<Zutat>) zutatRep.findAll();
     }
 }
-
-
-
-
