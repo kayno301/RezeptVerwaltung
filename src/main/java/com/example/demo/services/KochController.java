@@ -86,6 +86,7 @@ public class KochController {
     }
 
     //Scenario A.1
+    //todo: Rezepte müssen übergebbar gemacht werden
     @PostMapping
     public ResponseEntity<?> add(@Valid @RequestBody String body){
         String mitarbeitername;
@@ -103,6 +104,7 @@ public class KochController {
         return ResponseEntity.created(location).body(k);
     }
 
+    //A.2
     @GetMapping("/vergleich/noResponse")
     public ResponseEntity<?> vergleichNoResponse(@RequestBody String body){
         ArrayList<Koch> koeche = (ArrayList)kochReporsitory.findAll();
@@ -128,6 +130,31 @@ public class KochController {
         return ResponseEntity.ok().build();
     }
 
+    //A.3
+    //todo: vergleich aus dem szenario muss noch hinzugefügt werden
+    @PutMapping("/{id}")
+    public ResponseEntity<?> change(@PathVariable("id") Long id, @Valid @RequestBody String body){
+        Koch koch = kochReporsitory.findOne(id);
+        String mitarbeitername;
+        String mitarbeitervorname;
+        int gehalt;
+
+        JSONObject obj = new JSONObject(body);
+
+        mitarbeitername = obj.getString("mitarbeitername");
+        mitarbeitervorname = obj.getString("mitarbeitervorname");
+        gehalt = obj.getInt("gehalt");
+
+        koch.setMitarbeitername(mitarbeitername);
+        koch.setMitarbeitervornamen(mitarbeitervorname);
+        koch.setGehalt(gehalt);
+
+        kochReporsitory.save(koch);
+        URI location = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}").buildAndExpand(koch.getId()).toUri();
+        return ResponseEntity.created(location).body(koch);
+    }
+
+    //A.4
     @GetMapping("/vergleich")
     public ResponseEntity<?> vergleich(@RequestBody String body){
         ArrayList<Koch> koeche = (ArrayList)kochReporsitory.findAll();
@@ -151,29 +178,6 @@ public class KochController {
         }
 
         return ResponseEntity.ok().body(filtered);
-    }
-
-    //A.3
-    @PutMapping("/{id}")
-    public ResponseEntity<?> change(@PathVariable("id") Long id, @Valid @RequestBody String body){
-        Koch koch = kochReporsitory.findOne(id);
-        String mitarbeitername;
-        String mitarbeitervorname;
-        int gehalt;
-
-        JSONObject obj = new JSONObject(body);
-
-        mitarbeitername = obj.getString("mitarbeitername");
-        mitarbeitervorname = obj.getString("mitarbeitervorname");
-        gehalt = obj.getInt("gehalt");
-
-        koch.setMitarbeitername(mitarbeitername);
-        koch.setMitarbeitervornamen(mitarbeitervorname);
-        koch.setGehalt(gehalt);
-
-        kochReporsitory.save(koch);
-        URI location = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}").buildAndExpand(koch.getId()).toUri();
-        return ResponseEntity.created(location).body(koch);
     }
 
     // //A.3, aber warscheinlich nicht ganz richtig
@@ -202,6 +206,7 @@ public class KochController {
     // }
 
     //A.5
+    //todo: irgendwie den fehler beheben, wenn nicht möglich auch nicht schlimm
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deletefgdj(@PathVariable("id") Long id){
         Koch k = kochReporsitory.findOne(id);
@@ -212,4 +217,7 @@ public class KochController {
 
         return ResponseEntity.ok().body(k);
     }
+
+    //A.6
+    //todo: A.6 verstehen und implementieren
 }
