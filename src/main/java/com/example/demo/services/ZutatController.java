@@ -68,7 +68,7 @@ public class ZutatController {
         return ResponseEntity.created(location).body(k);
     }
 
-
+    //BC.5
     @GetMapping
     public List<Zutat> getAllZutaten() {
         return (List<Zutat>) zutatRep.findAll();

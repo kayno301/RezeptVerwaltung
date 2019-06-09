@@ -6,7 +6,7 @@ import javax.persistence.OneToOne;
 
 @Entity
 public class Manager extends Mitarbeiter {
-    @OneToOne(mappedBy = "manager", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "manager")
     private Speisekarte speisekarte;
 
     protected Manager() {

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -74,8 +75,33 @@ public class RezeptController {
         return ResponseEntity.created(location).body(k);
     }
 
+    //BC.4
+    @GetMapping
+    public List<Rezept> getAll(){
+        return (List<Rezept>) rezeptReporsitory.findAll();
+    }
+
+    //todo: funktiniert nicht (methode wird nicht gefunden)
+    //BC.6
+    @DeleteMapping("/{rid}/Zutat/{zid}")
+    public ResponseEntity<?> deleteReference(@PathVariable("rid") Long rid, @PathVariable("zid") Long zid){
+        Rezept rezept = rezeptReporsitory.findOne(rid);
+
+        if(rezept == null) return ResponseEntity.notFound().build();
+
+        ArrayList<Zutat> zutaten = (ArrayList<Zutat>) rezept.getZutaten();
+        ArrayList<Zutat> filtered = new ArrayList<>();
+
+        for(Zutat z : zutaten){
+            if(z.getId() != zid) {
+                filtered.add(z);
+            }
+        }
+
+        rezept.setZutaten((Set<Zutat>) filtered);
+
+        rezeptReporsitory.save(rezept);
+
+        return ResponseEntity.ok().body(rezept);
+    }
 }
-
-
-
-

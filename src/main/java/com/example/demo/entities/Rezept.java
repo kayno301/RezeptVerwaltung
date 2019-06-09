@@ -22,7 +22,7 @@ public class Rezept {
     @JsonBackReference
     private Koch koch;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany
     @JsonManagedReference
     private Set<Zutat> zutaten = new HashSet<>();
 
