@@ -16,7 +16,7 @@ public class Zutat {
     private int zutatMenge;
 
     //Todo: JoinTabel für Meilenstein 3 (Kann ohne fehler verursachen)
-    @ManyToMany(mappedBy = "zutaten", cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "zutaten")
     @JsonBackReference
     private Set<Rezept> rezepte = new HashSet<>();
 

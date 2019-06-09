@@ -12,7 +12,7 @@ public class Speisekarte {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @OneToMany(mappedBy = "speisekarte", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "speisekarte")
     @JsonManagedReference
     private Set<Rezept> rezepte = new HashSet<>();
 

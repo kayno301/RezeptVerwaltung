@@ -131,7 +131,6 @@ public class KochController {
     }
 
     //A.3
-    //todo: vergleich aus dem szenario muss noch hinzugefügt werden
     @PutMapping("/{id}")
     public ResponseEntity<?> change(@PathVariable("id") Long id, @Valid @RequestBody String body){
         Koch koch = kochReporsitory.findOne(id);
@@ -147,7 +146,7 @@ public class KochController {
 
         koch.setMitarbeitername(mitarbeitername);
         koch.setMitarbeitervornamen(mitarbeitervorname);
-        koch.setGehalt(gehalt);
+        if(koch.getGehalt() > gehalt) koch.setGehalt(gehalt);
 
         kochReporsitory.save(koch);
         URI location = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}").buildAndExpand(koch.getId()).toUri();
@@ -208,7 +207,7 @@ public class KochController {
     //A.5
     //todo: irgendwie den fehler beheben, wenn nicht möglich auch nicht schlimm
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deletefgdj(@PathVariable("id") Long id){
+    public ResponseEntity<?> delete(@PathVariable("id") Long id){
         Koch k = kochReporsitory.findOne(id);
 
         if(k == null) return ResponseEntity.notFound().build();
