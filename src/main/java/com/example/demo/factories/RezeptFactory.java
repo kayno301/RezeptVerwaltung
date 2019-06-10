@@ -7,10 +7,16 @@ import com.example.demo.entities.Zutat;
 import com.example.demo.valueObjects.Kategorie;
 import org.springframework.stereotype.Component;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 import java.util.Set;
 
 @Component
 public class RezeptFactory {
+
+    @PersistenceContext
+    private EntityManager entityManager;
 
     public RezeptFactory() {
     }
@@ -24,4 +30,7 @@ public class RezeptFactory {
 
         return r1;
     }
+
+
+
 }

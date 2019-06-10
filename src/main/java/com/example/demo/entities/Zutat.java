@@ -1,6 +1,11 @@
 package com.example.demo.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -8,6 +13,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+@Table(name = "zutaten")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Zutat {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -16,8 +23,12 @@ public class Zutat {
     private int zutatMenge;
 
     //Todo: JoinTabel für Meilenstein 3 (Kann ohne fehler verursachen)
-    @ManyToMany(mappedBy = "zutaten")
-    @JsonBackReference
+
+
+    @ManyToMany(
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL,
+            mappedBy = "zutaten")
     private Set<Rezept> rezepte = new HashSet<>();
 
     public Zutat() {

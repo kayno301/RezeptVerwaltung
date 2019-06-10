@@ -5,6 +5,7 @@ import com.example.demo.factories.KochFactory;
 import com.example.demo.reporsitories.KochReporsitory;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -17,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/Koch")
+@RequestMapping("/koch")
 public class KochController {
 
     @Autowired
@@ -100,7 +101,8 @@ public class KochController {
         gehalt = obj.getInt("gehalt");
 
         Koch k = kochReporsitory.save(new Koch(mitarbeitername, mitarbeitervorname, gehalt));
-        URI location = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}").buildAndExpand(k.getId()).toUri();
+        URI location = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}").
+                buildAndExpand(k.getId()).toUri();
         return ResponseEntity.created(location).body(k);
     }
 
@@ -149,7 +151,8 @@ public class KochController {
         if(koch.getGehalt() > gehalt) koch.setGehalt(gehalt);
 
         kochReporsitory.save(koch);
-        URI location = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}").buildAndExpand(koch.getId()).toUri();
+        URI location = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}").
+                buildAndExpand(koch.getId()).toUri();
         return ResponseEntity.created(location).body(koch);
     }
 
@@ -205,18 +208,23 @@ public class KochController {
     // }
 
     //A.5
-    //todo: irgendwie den fehler beheben, wenn nicht möglich auch nicht schlimm
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable("id") Long id){
-        Koch k = kochReporsitory.findOne(id);
-
-        if(k == null) return ResponseEntity.notFound().build();
-
-        kochReporsitory.delete(k);
-
-        return ResponseEntity.ok().body(k);
+    public ResponseEntity<?> deleteKoche(@PathVariable("id") Long id) {
+        if (kochReporsitory.exists(id)) {
+            kochReporsitory.delete(id);
+            return ResponseEntity.ok().build();
+        } else return ResponseEntity.notFound().build();
     }
 
     //A.6
-    //todo: A.6 verstehen und implementieren
+    @GetMapping("/get/{id}")
+    public @ResponseBody ResponseEntity<String>
+    getById(@PathVariable Long id) {
+
+        if (kochReporsitory.exists(id)) {
+            return new ResponseEntity<String>("Koch existiert mit der id  : "
+                    + id, HttpStatus.OK);
+        }
+        return new ResponseEntity<String>("Kein Benutzer mit der id "+id , HttpStatus.OK);
+    }
 }

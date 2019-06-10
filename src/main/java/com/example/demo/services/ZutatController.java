@@ -1,7 +1,9 @@
 package com.example.demo.services;
 
+import com.example.demo.entities.Rezept;
 import com.example.demo.entities.Zutat;
 import com.example.demo.factories.ZutatFactory;
+import com.example.demo.reporsitories.RezeptReporsitory;
 import com.example.demo.reporsitories.ZutatReporsitory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +14,7 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/Zutat")
+@RequestMapping("/zutat")
 public class ZutatController {
 
     @Autowired
@@ -68,9 +70,36 @@ public class ZutatController {
         return ResponseEntity.created(location).body(k);
     }
 
+    //B2
+    @PostMapping("/zutatenAnlegen")
+    public ResponseEntity<?> zutatenAnlegen(
+            @RequestParam("zutatNamen") String zutatNamen, @RequestParam("zutatMenge") int zutatMenge,
+            @RequestParam("zutatNamen2") String zutatNamen2,
+            @RequestParam("zutatMenge2") int zutatMenge2) {
+        Zutat k = zutatRep.save(new ZutatFactory().createZutat(zutatNamen, zutatMenge));
+        Zutat k2 = zutatRep.save(new ZutatFactory().createZutat(zutatNamen2, zutatMenge2));
+        URI location = ServletUriComponentsBuilder.fromCurrentRequestUri()
+                .path("/{id}").buildAndExpand(k.getId()).toUri();
+        return ResponseEntity.created(location).body(k);
+    }
+
+
+
+
     //BC.5
     @GetMapping
     public List<Zutat> getAllZutaten() {
         return (List<Zutat>) zutatRep.findAll();
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteZutat(@PathVariable("id") Long id) {
+        if (zutatRep.exists(id)) {
+            zutatRep.delete(id);
+            return ResponseEntity.ok().build();
+        } else return ResponseEntity.notFound().build();
+    }
+
+
+
 }

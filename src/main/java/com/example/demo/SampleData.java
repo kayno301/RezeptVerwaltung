@@ -43,11 +43,15 @@ public class SampleData implements ApplicationListener<ContextRefreshedEvent> {
 
 
         Zutat z1 = new ZutatFactory().createZutat("Zitrone", 2);
+        Zutat z2 = new ZutatFactory().createZutat("Banane", 2);
         Set<Zutat> zutaten1 = new HashSet<Zutat>();
+        Set<Zutat> zutaten2 = new HashSet<Zutat>();
         zutaten1.add(z1);
+        zutaten2.add(z2);
         zutatReporsitory.save(zutaten1);
+        zutatReporsitory.save(zutaten2);
         sRep.save(s2);
-        Rezept r1 = new RezeptFactory().createRezept("Spaghetti", "Jaja", k1, koch2, s2, zutaten1);
+        Rezept r1 = new RezeptFactory().createRezept("Spaghetti", "Jaja", k1, koch2, s2, zutaten2);
         spRep.save(r1);
         spRep.save(new RezeptFactory().createRezept("Nudeln", "Kochen Sie die Nudeln", k1, koch1, s2, zutaten1));
         spRep.save(new RezeptFactory().createRezept("Fleisch", "Schneiden Sie das Fleisch", k2, koch1, s2, zutaten1));

@@ -5,6 +5,7 @@ import com.example.demo.entities.Speisekarte;
 import com.example.demo.factories.SpeisekarteFactory;
 import com.example.demo.reporsitories.SpeisekarteReporsitory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -17,6 +18,7 @@ public class SpeisekarteController {
 
     @Autowired
     private SpeisekarteReporsitory speisekarteRepository;
+
 
     /**
      * Alle Kunden auslesen
@@ -67,6 +69,9 @@ public class SpeisekarteController {
                 .path("/{id}").buildAndExpand(k.getId()).toUri();
         return ResponseEntity.created(location).body(k);
     }
+
+
+
 
 }
 

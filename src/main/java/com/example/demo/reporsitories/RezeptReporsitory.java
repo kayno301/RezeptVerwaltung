@@ -18,4 +18,5 @@ public interface RezeptReporsitory extends CrudRepository<Rezept, Long> {
     List<Rezept> findByRezeptName(String rezeptName);
     List<Rezept> findByRezeptBeschreibung(String rezeptBeschreibung);
     List<Rezept> findByKategorie(Kategorie kategorie);
+  
 }

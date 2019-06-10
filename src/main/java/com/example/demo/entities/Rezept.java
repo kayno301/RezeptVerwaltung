@@ -1,14 +1,17 @@
 package com.example.demo.entities;
 
 import com.example.demo.valueObjects.Kategorie;
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+@Table(name = "rezepts")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Rezept {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -23,7 +26,9 @@ public class Rezept {
     private Koch koch;
 
     @ManyToMany
-    @JsonManagedReference
+    @JoinTable(name = "rezept",
+            joinColumns = @JoinColumn(name = "rezept_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "zutaten_id", referencedColumnName = "id"))
     private Set<Zutat> zutaten = new HashSet<>();
 
     private String rezeptName;

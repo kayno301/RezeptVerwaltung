@@ -1,12 +1,15 @@
 package com.example.demo.entities;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Speisekarte {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -17,6 +20,7 @@ public class Speisekarte {
     private Set<Rezept> rezepte = new HashSet<>();
 
     @OneToOne
+    @JsonManagedReference
     private Manager manager;
 
     private String speisekarteNamen;

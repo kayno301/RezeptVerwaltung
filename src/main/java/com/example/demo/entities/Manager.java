@@ -1,13 +1,19 @@
 package com.example.demo.entities;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity()
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Manager extends Mitarbeiter {
     @OneToOne(mappedBy = "manager")
+    @JsonManagedReference
     private Speisekarte speisekarte;
 
     protected Manager() {
